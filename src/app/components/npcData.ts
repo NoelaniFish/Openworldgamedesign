@@ -12,14 +12,20 @@ import nycNpc3 from '../imports/Untitled_Artwork_47.gif';
 import nycNpc4 from '../imports/Untitled_Artwork_48.gif';
 
 // Portrait images (GIFs)
-import amberImg from '../imports/Untitled_Artwork_18-1.gif';
-import portiaImg from '../imports/Untitled_Artwork_17-1.gif';
-import joceImg from '../imports/IMG_1860-1.gif';
+import amberImg from '../imports/Untitled_Artwork_18.gif';
+import portiaImg from '../imports/Untitled_Artwork_17.gif';
+import joceImg from '../imports/IMG_1860.gif';
+import dImg from '../imports/Untitled_Artwork_41.gif';
+import samImg from '../imports/Untitled_Artwork_40-1.gif';
+import romeroImg from '../imports/Untitled_Artwork_19.gif';
 
 // Import shared dialogue
 import { amberDialogue } from './amberDialogue';
 import { portiaDialogue } from './portiaDialogue';
 import { joceDialogue } from './joceDialogue';
+import { dDialogue } from './dDialogue';
+import { samDialogue } from './samDialogue';
+import { romeroDialogue } from './romeroDialogue';
 
 // Debug logging
 console.log('NPC GIF imports:', {
@@ -27,14 +33,65 @@ console.log('NPC GIF imports:', {
   nycNpc1,
   amberImg,
   portiaImg,
-  joceImg
+  joceImg,
+  dImg,
+  samImg,
+  romeroImg
 });
+
+// NYC Character pool - randomized on NPC click
+export const nycCharacters = [
+  {
+    name: 'A.',
+    portraitImage: amberImg,
+    dialogue: amberDialogue
+  },
+  {
+    name: 'P.',
+    portraitImage: portiaImg,
+    dialogue: portiaDialogue
+  },
+  {
+    name: 'S.',
+    portraitImage: samImg,
+    dialogue: samDialogue
+  },
+  {
+    name: 'R.',
+    portraitImage: romeroImg,
+    dialogue: romeroDialogue
+  }
+];
+
+// Function to get random NYC character
+export const getRandomNYCCharacter = () => {
+  return nycCharacters[Math.floor(Math.random() * nycCharacters.length)];
+};
+
+// Knoxville Character pool - randomized on NPC click
+export const knoxvilleCharacters = [
+  {
+    name: 'J.',
+    portraitImage: joceImg,
+    dialogue: joceDialogue
+  },
+  {
+    name: 'D.',
+    portraitImage: dImg,
+    dialogue: dDialogue
+  }
+];
+
+// Function to get random Knoxville character
+export const getRandomKnoxvilleCharacter = () => {
+  return knoxvilleCharacters[Math.floor(Math.random() * knoxvilleCharacters.length)];
+};
 
 // World 1 NPCs - Knox County, Tennessee
 export const npcsWorld1 = [
   {
     id: 'elder',
-    name: 'Joce',
+    name: 'J.',
     x: 350,
     y: 800,
     color: '#8b4513',
@@ -45,7 +102,7 @@ export const npcsWorld1 = [
   },
   {
     id: 'merchant',
-    name: 'Joce',
+    name: 'J.',
     x: 1600,
     y: 350,
     color: '#ff6347',
@@ -56,7 +113,7 @@ export const npcsWorld1 = [
   },
   {
     id: 'traveler',
-    name: 'Joce',
+    name: 'J.',
     x: 1200,
     y: 900,
     color: '#20b2aa',
@@ -67,7 +124,7 @@ export const npcsWorld1 = [
   },
   {
     id: 'artist',
-    name: 'Joce',
+    name: 'J.',
     x: 800,
     y: 400,
     color: '#ff8c00',
@@ -78,7 +135,7 @@ export const npcsWorld1 = [
   },
   {
     id: 'teacher',
-    name: 'Joce',
+    name: 'J.',
     x: 500,
     y: 600,
     color: '#ff4500',
@@ -93,7 +150,7 @@ export const npcsWorld1 = [
 export const npcsWorld2 = [
   {
     id: 'guardian',
-    name: 'Portia',
+    name: 'P.',
     x: 1000,
     y: 600,
     color: '#9370db',
@@ -104,7 +161,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'scholar',
-    name: 'Amber',
+    name: 'A.',
     x: 350,
     y: 200,
     color: '#663399',
@@ -115,7 +172,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'wanderer',
-    name: 'Portia',
+    name: 'P.',
     x: 1700,
     y: 1000,
     color: '#4169e1',
@@ -126,7 +183,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'creator',
-    name: 'Amber',
+    name: 'A.',
     x: 600,
     y: 800,
     color: '#6a5acd',
@@ -137,7 +194,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'poet',
-    name: 'Portia',
+    name: 'P.',
     x: 450,
     y: 450,
     color: '#8a2be2',
@@ -148,7 +205,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'architect',
-    name: 'Amber',
+    name: 'A.',
     x: 1400,
     y: 300,
     color: '#5f4b8b',
@@ -159,7 +216,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'historian',
-    name: 'Portia',
+    name: 'P.',
     x: 900,
     y: 200,
     color: '#7b68ee',
@@ -170,7 +227,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'philosopher',
-    name: 'Amber',
+    name: 'A.',
     x: 1500,
     y: 750,
     color: '#483d8b',
@@ -181,7 +238,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'musician',
-    name: 'Portia',
+    name: 'P.',
     x: 250,
     y: 650,
     color: '#6495ed',
@@ -192,7 +249,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'storyteller',
-    name: 'Amber',
+    name: 'A.',
     x: 1800,
     y: 500,
     color: '#551a8b',
@@ -203,7 +260,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'observer',
-    name: 'Portia',
+    name: 'P.',
     x: 700,
     y: 150,
     color: '#836fff',
@@ -214,7 +271,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'dreamer',
-    name: 'Amber',
+    name: 'A.',
     x: 1200,
     y: 900,
     color: '#4b0082',
@@ -225,7 +282,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'guide',
-    name: 'Portia',
+    name: 'P.',
     x: 500,
     y: 1000,
     color: '#5d478b',
@@ -236,7 +293,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'visionary',
-    name: 'Amber',
+    name: 'A.',
     x: 1600,
     y: 200,
     color: '#6a0dad',
@@ -247,7 +304,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'seeker',
-    name: 'Portia',
+    name: 'P.',
     x: 800,
     y: 950,
     color: '#7d26cd',
@@ -258,7 +315,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'explorer',
-    name: 'Amber',
+    name: 'A.',
     x: 1300,
     y: 500,
     color: '#9932cc',
@@ -269,7 +326,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'sentinel',
-    name: 'Portia',
+    name: 'P.',
     x: 400,
     y: 300,
     color: '#8470ff',
@@ -280,7 +337,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'voyager',
-    name: 'Amber',
+    name: 'A.',
     x: 1750,
     y: 700,
     color: '#6959cd',
@@ -291,7 +348,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'keeper',
-    name: 'Portia',
+    name: 'P.',
     x: 650,
     y: 550,
     color: '#7a67ee',
@@ -302,7 +359,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'sage',
-    name: 'Amber',
+    name: 'A.',
     x: 950,
     y: 400,
     color: '#5d3fd3',
@@ -313,7 +370,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'mystic',
-    name: 'Portia',
+    name: 'P.',
     x: 1450,
     y: 850,
     color: '#9966cc',
@@ -324,7 +381,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'prophet',
-    name: 'Amber',
+    name: 'A.',
     x: 300,
     y: 900,
     color: '#7851a9',
@@ -335,7 +392,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'oracle',
-    name: 'Portia',
+    name: 'P.',
     x: 1100,
     y: 250,
     color: '#9370db',
@@ -346,7 +403,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'bard',
-    name: 'Amber',
+    name: 'A.',
     x: 750,
     y: 700,
     color: '#6a5acd',
@@ -357,7 +414,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'nomad',
-    name: 'Portia',
+    name: 'P.',
     x: 1850,
     y: 350,
     color: '#483d8b',
@@ -368,7 +425,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'apprentice',
-    name: 'Amber',
+    name: 'A.',
     x: 550,
     y: 150,
     color: '#8b7ab8',
@@ -379,7 +436,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'champion',
-    name: 'Portia',
+    name: 'P.',
     x: 1550,
     y: 600,
     color: '#9400d3',
@@ -390,7 +447,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'witness',
-    name: 'Amber',
+    name: 'A.',
     x: 850,
     y: 850,
     color: '#663399',
@@ -401,7 +458,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'watcher',
-    name: 'Portia',
+    name: 'P.',
     x: 200,
     y: 500,
     color: '#7b68ee',
@@ -412,7 +469,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'pilgrim',
-    name: 'Amber',
+    name: 'A.',
     x: 1650,
     y: 450,
     color: '#9370db',
@@ -423,7 +480,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'advocate',
-    name: 'Portia',
+    name: 'P.',
     x: 450,
     y: 750,
     color: '#6a5acd',
@@ -434,7 +491,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'pioneer',
-    name: 'Amber',
+    name: 'A.',
     x: 1250,
     y: 150,
     color: '#4b0082',
@@ -445,7 +502,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'mentor',
-    name: 'Portia',
+    name: 'P.',
     x: 700,
     y: 950,
     color: '#8a2be2',
@@ -456,7 +513,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'curator',
-    name: 'Amber',
+    name: 'A.',
     x: 1900,
     y: 800,
     color: '#5d478b',
@@ -467,7 +524,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'luminary',
-    name: 'Portia',
+    name: 'P.',
     x: 350,
     y: 400,
     color: '#836fff',
@@ -478,7 +535,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'scribe',
-    name: 'Amber',
+    name: 'A.',
     x: 1400,
     y: 550,
     color: '#6495ed',
@@ -489,7 +546,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'herald',
-    name: 'Portia',
+    name: 'P.',
     x: 600,
     y: 350,
     color: '#551a8b',
@@ -500,7 +557,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'envoy',
-    name: 'Amber',
+    name: 'A.',
     x: 1050,
     y: 750,
     color: '#6a0dad',
@@ -511,7 +568,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'emissary',
-    name: 'Portia',
+    name: 'P.',
     x: 1700,
     y: 250,
     color: '#7d26cd',
@@ -522,7 +579,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'guardian2',
-    name: 'Amber',
+    name: 'A.',
     x: 800,
     y: 600,
     color: '#9932cc',
@@ -533,7 +590,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'pathfinder',
-    name: 'Portia',
+    name: 'P.',
     x: 250,
     y: 800,
     color: '#8470ff',
@@ -544,7 +601,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'chronicler',
-    name: 'Amber',
+    name: 'A.',
     x: 1500,
     y: 950,
     color: '#6959cd',
@@ -555,7 +612,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'steward',
-    name: 'Portia',
+    name: 'P.',
     x: 900,
     y: 500,
     color: '#7a67ee',
@@ -566,7 +623,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'artisan',
-    name: 'Amber',
+    name: 'A.',
     x: 400,
     y: 200,
     color: '#5d3fd3',
@@ -577,7 +634,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'weaver',
-    name: 'Portia',
+    name: 'P.',
     x: 1350,
     y: 700,
     color: '#9966cc',
@@ -588,7 +645,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'tinker',
-    name: 'Amber',
+    name: 'A.',
     x: 650,
     y: 450,
     color: '#7851a9',
@@ -599,7 +656,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'builder',
-    name: 'Portia',
+    name: 'P.',
     x: 1800,
     y: 600,
     color: '#9370db',
@@ -610,7 +667,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'architect2',
-    name: 'Amber',
+    name: 'A.',
     x: 500,
     y: 900,
     color: '#6a5acd',
@@ -621,7 +678,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'inventor',
-    name: 'Portia',
+    name: 'P.',
     x: 1150,
     y: 350,
     color: '#483d8b',
@@ -632,7 +689,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'crafter',
-    name: 'Amber',
+    name: 'A.',
     x: 750,
     y: 800,
     color: '#8b7ab8',
@@ -643,7 +700,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'designer',
-    name: 'Portia',
+    name: 'P.',
     x: 1600,
     y: 500,
     color: '#9400d3',
@@ -654,7 +711,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'maker',
-    name: 'Amber',
+    name: 'A.',
     x: 300,
     y: 600,
     color: '#663399',
@@ -665,7 +722,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'sculptor',
-    name: 'Portia',
+    name: 'P.',
     x: 1450,
     y: 150,
     color: '#7b68ee',
@@ -676,7 +733,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'painter',
-    name: 'Amber',
+    name: 'A.',
     x: 850,
     y: 250,
     color: '#9370db',
@@ -687,7 +744,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'composer',
-    name: 'Portia',
+    name: 'P.',
     x: 550,
     y: 700,
     color: '#6a5acd',
@@ -698,7 +755,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'conductor',
-    name: 'Amber',
+    name: 'A.',
     x: 1750,
     y: 850,
     color: '#4b0082',
@@ -709,7 +766,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'performer',
-    name: 'Portia',
+    name: 'P.',
     x: 200,
     y: 350,
     color: '#8a2be2',
@@ -720,7 +777,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'dancer',
-    name: 'Amber',
+    name: 'A.',
     x: 1200,
     y: 650,
     color: '#5d478b',
@@ -731,7 +788,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'acrobat',
-    name: 'Portia',
+    name: 'P.',
     x: 700,
     y: 400,
     color: '#836fff',
@@ -742,7 +799,7 @@ export const npcsWorld2 = [
   },
   {
     id: 'jester',
-    name: 'Amber',
+    name: 'A.',
     x: 1900,
     y: 200,
     color: '#6495ed',

@@ -125,66 +125,71 @@ export function ProfileForm({ onComplete, selectedWorld }: ProfileFormProps) {
     : '#991b1b'; // Deep red for Knoxville
 
   return (
-    <div 
+    <div
       className="fixed inset-0 z-[100] flex items-center justify-center px-8 transition-opacity duration-1000"
-      style={{ 
+      style={{
         opacity: isVisible ? 1 : 0,
         backgroundColor: backgroundColor
       }}
     >
-      <form onSubmit={handleSubmit} className="w-full max-w-6xl">
-        <h2 className="text-white text-5xl font-bold font-['Helvetica'] mb-12 text-center">
-          Create Your Profile
+      <form onSubmit={handleSubmit} className="w-full max-w-7xl">
+        <h2 className="text-white text-6xl font-bold font-['Instrument_Serif'] mb-16 text-center tracking-tight">
+          create your profile
         </h2>
-        
-        <div className="flex gap-12 items-start">
+
+        <div className="flex gap-16 items-start">
           {/* Left: Drawing Canvas */}
           <div className="flex-shrink-0">
-            <label className="text-white text-2xl font-['Helvetica'] mb-4 block">
-              Draw Your Portrait
+            <label className="text-white text-2xl font-['Helvetica'] mb-6 block tracking-wide">
+              draw your portrait
             </label>
             <div className="relative">
-              <canvas
-                ref={canvasRef}
-                width={400}
-                height={400}
-                onMouseDown={startDrawing}
-                onMouseMove={draw}
-                onMouseUp={stopDrawing}
-                onMouseLeave={stopDrawing}
-                className="border-4 border-white rounded-lg cursor-crosshair bg-white"
-              />
+              <div className="border-4 border-white rounded-2xl p-2 bg-white shadow-2xl">
+                <canvas
+                  ref={canvasRef}
+                  width={400}
+                  height={400}
+                  onMouseDown={startDrawing}
+                  onMouseMove={draw}
+                  onMouseUp={stopDrawing}
+                  onMouseLeave={stopDrawing}
+                  className="cursor-crosshair bg-white rounded-lg"
+                />
+              </div>
               <button
                 type="button"
                 onClick={clearCanvas}
-                className="mt-4 px-6 py-2 bg-white hover:bg-gray-200 text-black text-lg font-['Helvetica'] rounded-lg transition-all"
+                className="mt-6 w-full px-6 py-3 bg-black border-2 border-white hover:bg-white hover:text-black text-white text-base font-['Helvetica'] rounded-lg transition-all"
               >
-                Clear Canvas
+                clear canvas
               </button>
             </div>
           </div>
-          
+
           {/* Right: Form Fields */}
           <div className="flex-1 flex flex-col gap-8">
-            <div>
-              <label className="text-white text-2xl font-['Helvetica'] mb-4 block">
-                Explain Your Own Identity
+            <div className="flex-1">
+              <label className="text-white text-2xl font-['Helvetica'] mb-6 block tracking-wide">
+                explain your own identity
               </label>
-              <textarea
-                value={identity}
-                onChange={(e) => setIdentity(e.target.value)}
-                required
-                rows={12}
-                className="w-full px-6 py-4 text-xl font-['Helvetica'] rounded-lg border-4 border-white bg-black text-white focus:outline-none focus:border-yellow-400 transition-colors resize-none"
-                placeholder="Share your thoughts on your identity..."
-              />
+              <div className="border-4 border-white rounded-2xl p-2 bg-black shadow-2xl">
+                <textarea
+                  value={identity}
+                  onChange={(e) => setIdentity(e.target.value)}
+                  required
+                  rows={14}
+                  className="w-full px-6 py-4 text-lg font-['Helvetica'] rounded-lg bg-black text-white focus:outline-none resize-none placeholder-gray-400"
+                  placeholder="share your thoughts on your identity..."
+                  style={{ minHeight: '400px' }}
+                />
+              </div>
             </div>
-            
+
             <button
               type="submit"
-              className="px-12 py-6 bg-white hover:bg-gray-200 text-black text-2xl font-bold font-['Helvetica'] rounded-lg transition-all hover:scale-105 transform shadow-2xl self-end"
+              className="px-12 py-4 bg-black border-2 border-white hover:bg-white hover:text-black text-white text-xl font-bold font-['Helvetica'] rounded-lg transition-all hover:scale-105 transform shadow-2xl self-end"
             >
-              Enter butch.world
+              enter butch.world
             </button>
           </div>
         </div>

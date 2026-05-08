@@ -18,6 +18,7 @@ interface DialogueBoxProps {
   npcPortrait: string;
   onChoice: (nextDialogue: any) => void;
   currentWorld: 'world1' | 'world2';
+  rootDialogue?: any;
 }
 
 const exitQuips = [
@@ -31,7 +32,7 @@ const exitQuips = [
   "I'll be on my way now."
 ];
 
-export function DialogueBox({ dialogue, npcName, npcPortrait, onChoice, currentWorld }: DialogueBoxProps) {
+export function DialogueBox({ dialogue, npcName, npcPortrait, onChoice, currentWorld, rootDialogue }: DialogueBoxProps) {
   const [playerPortraitIndex, setPlayerPortraitIndex] = useState(0);
   const [colorShift, setColorShift] = useState(0);
   const [exitQuip, setExitQuip] = useState('');
@@ -296,6 +297,16 @@ export function DialogueBox({ dialogue, npcName, npcPortrait, onChoice, currentW
                   {choice.text}
                 </button>
               ))
+            )}
+            {/* Show "let's try that again" button at conversation end points */}
+            {rootDialogue && (!dialogue.choices || dialogue.choices.length === 0) && (
+              <button
+                onClick={() => onChoice(rootDialogue)}
+                className="w-full text-left px-6 py-4 bg-blue-900/70 hover:bg-blue-800 text-white rounded-lg border-2 border-blue-600 hover:border-blue-400 transition-all text-lg font-['Helvetica'] hover:scale-105 transform"
+              >
+                <span className="text-blue-400 mr-3 text-xl">↻</span>
+                let's try that again
+              </button>
             )}
             {/* Always show exit button at every branch */}
             <button

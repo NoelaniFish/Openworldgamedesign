@@ -6,12 +6,13 @@ import { WorldSelector } from '../components/WorldSelector';
 import { TreeFactModal } from '../components/TreeFactModal';
 import { NotepadModal } from '../components/NotepadModal';
 import { SettingsPanel } from '../components/SettingsPanel';
-import { npcsWorld1, npcsWorld2 } from '../components/npcData';
+import { npcsWorld1, npcsWorld2, nycCharacters, knoxvilleCharacters } from '../components/npcData';
 import { useKnoxvilleWeather } from '../hooks/useKnoxvilleWeather';
 import { useNYCWeather } from '../hooks/useNYCWeather';
 import { treeFacts } from '../components/treeFacts';
 import homingSound from '../imports/homing.mp3';
 import maloneyRdSound from '../imports/Maloney_Rd_2.mp3';
+import nycSubwaySound from '../imports/757583__thel200ster__nyc-subway-sept-24.mp3';
 
 // Generate trees of knowledge (8-12 trees)
 const generateTrees = () => {
@@ -168,6 +169,7 @@ export function GameWorldPage() {
 
   const [player, setPlayer] = useState({ x: 1280, y: 720 });
   const [currentDialogue, setCurrentDialogue] = useState<any>(null);
+  const [rootDialogue, setRootDialogue] = useState<any>(null);
   const [currentNpc, setCurrentNpc] = useState<any>(null);
   const [keysPressed, setKeysPressed] = useState<Set<string>>(new Set());
   const [isMoving, setIsMoving] = useState(false);
@@ -188,11 +190,15 @@ export function GameWorldPage() {
 
   const homingAudioRef = useRef<HTMLAudioElement | null>(null);
   const maloneyAudioRef = useRef<HTMLAudioElement | null>(null);
+  const nycSubwayAudioRef = useRef<HTMLAudioElement | null>(null);
   const isPlayingHomingRef = useRef(false);
   const isPlayingMaloneyRef = useRef(false);
+  const isPlayingNycSubwayRef = useRef(false);
 
   const [showAudioEnable, setShowAudioEnable] = useState(true);
   const [controlsTimer, setControlsTimer] = useState<NodeJS.Timeout | null>(null);
+  const [shownNYCCharacters, setShownNYCCharacters] = useState<Set<string>>(new Set());
+  const [shownKnoxvilleCharacters, setShownKnoxvilleCharacters] = useState<Set<string>>(new Set());
 
   const [blockades] = useState(generateBlockades());
   const [knoxvilleCars] = useState(generateKnoxvilleCars());
@@ -258,6 +264,12 @@ export function GameWorldPage() {
     y: npcPositions[npc.id]?.y ?? npc.y
   }));
 
+  // Debug: Log NPC count
+  useEffect(() => {
+    console.log(`Current world: ${currentWorld}, NPC count: ${currentNpcs.length}`);
+    console.log('First NPC:', currentNpcs[0]);
+  }, [currentWorld, currentNpcs]);
+
   const currentBlockades = blockades.map(blockade => ({
     ...blockade,
     x: blockadePositions[blockade.id]?.x ?? blockade.x,
@@ -291,15 +303,21 @@ export function GameWorldPage() {
 
     const homing = new Audio(homingSound);
     homing.loop = true;
-    homing.volume = 0.5;
+    homing.volume = 0.9;
     homing.preload = 'auto';
     homingAudioRef.current = homing;
 
     const maloney = new Audio(maloneyRdSound);
     maloney.loop = true;
-    maloney.volume = 0.5;
+    maloney.volume = 0.9;
     maloney.preload = 'auto';
     maloneyAudioRef.current = maloney;
+
+    const nycSubway = new Audio(nycSubwaySound);
+    nycSubway.loop = true;
+    nycSubway.volume = 0.5;
+    nycSubway.preload = 'auto';
+    nycSubwayAudioRef.current = nycSubway;
 
     return () => {
       if (homingAudioRef.current) {
@@ -309,6 +327,10 @@ export function GameWorldPage() {
       if (maloneyAudioRef.current) {
         maloneyAudioRef.current.pause();
         maloneyAudioRef.current = null;
+      }
+      if (nycSubwayAudioRef.current) {
+        nycSubwayAudioRef.current.pause();
+        nycSubwayAudioRef.current = null;
       }
     };
   }, []);
@@ -430,6 +452,23 @@ export function GameWorldPage() {
       isPlayingMaloneyRef.current = false;
     }
   }, [player.x, player.y, currentBlockades, currentWorld]);
+
+  // NYC subway background audio
+  useEffect(() => {
+    if (!nycSubwayAudioRef.current) return;
+
+    if (currentWorld === 'world2' && !isPlayingNycSubwayRef.current) {
+      nycSubwayAudioRef.current.play()
+        .then(() => {
+          isPlayingNycSubwayRef.current = true;
+        })
+        .catch(err => console.error('NYC subway audio play failed:', err));
+    } else if (currentWorld !== 'world2' && isPlayingNycSubwayRef.current) {
+      nycSubwayAudioRef.current.pause();
+      nycSubwayAudioRef.current.currentTime = 0;
+      isPlayingNycSubwayRef.current = false;
+    }
+  }, [currentWorld]);
 
   // Blockade wandering logic
   useEffect(() => {
@@ -832,8 +871,63 @@ export function GameWorldPage() {
     );
 
     if (distance < 80) {
-      setCurrentNpc(npc);
-      setCurrentDialogue(npc.dialogue);
+      // Randomize character for NYC NPCs
+      if (currentWorld === 'world2') {
+        // Filter out characters already shown in this rotation
+        let availableCharacters = nycCharacters.filter((char: any) => !shownNYCCharacters.has(char.name));
+
+        // If all characters have been shown, reset the rotation
+        if (availableCharacters.length === 0) {
+          setShownNYCCharacters(new Set());
+          availableCharacters = nycCharacters;
+        }
+
+        // Get random character from available pool
+        const randomCharacter = availableCharacters[Math.floor(Math.random() * availableCharacters.length)];
+
+        // Mark this character as shown
+        setShownNYCCharacters(prev => new Set(prev).add(randomCharacter.name));
+
+        const npcWithRandomCharacter = {
+          ...npc,
+          name: randomCharacter.name,
+          portraitImage: randomCharacter.portraitImage,
+          dialogue: randomCharacter.dialogue
+        };
+        setCurrentNpc(npcWithRandomCharacter);
+        setCurrentDialogue(randomCharacter.dialogue);
+        setRootDialogue(randomCharacter.dialogue);
+      } else if (currentWorld === 'world1') {
+        // Randomize character for Knoxville NPCs
+        // Filter out characters already shown in this rotation
+        let availableCharacters = knoxvilleCharacters.filter((char: any) => !shownKnoxvilleCharacters.has(char.name));
+
+        // If all characters have been shown, reset the rotation
+        if (availableCharacters.length === 0) {
+          setShownKnoxvilleCharacters(new Set());
+          availableCharacters = knoxvilleCharacters;
+        }
+
+        // Get random character from available pool
+        const randomCharacter = availableCharacters[Math.floor(Math.random() * availableCharacters.length)];
+
+        // Mark this character as shown
+        setShownKnoxvilleCharacters(prev => new Set(prev).add(randomCharacter.name));
+
+        const npcWithRandomCharacter = {
+          ...npc,
+          name: randomCharacter.name,
+          portraitImage: randomCharacter.portraitImage,
+          dialogue: randomCharacter.dialogue
+        };
+        setCurrentNpc(npcWithRandomCharacter);
+        setCurrentDialogue(randomCharacter.dialogue);
+        setRootDialogue(randomCharacter.dialogue);
+      } else {
+        setCurrentNpc(npc);
+        setCurrentDialogue(npc.dialogue);
+        setRootDialogue(npc.dialogue);
+      }
       setRevealedNpcs(prev => new Set(prev).add(npc.id));
     }
   };
@@ -844,6 +938,7 @@ export function GameWorldPage() {
     } else {
       setCurrentDialogue(null);
       setCurrentNpc(null);
+      setRootDialogue(null);
     }
   };
 
@@ -890,24 +985,38 @@ export function GameWorldPage() {
     setResponses(prev => [...prev, { timestamp, response }]);
   };
 
-  const handleEnableAudio = () => {
-    if (homingAudioRef.current && maloneyAudioRef.current) {
-      homingAudioRef.current.play()
-        .then(() => {
-          homingAudioRef.current?.pause();
-          homingAudioRef.current!.currentTime = 0;
-        })
-        .catch(err => console.error('Homing unlock failed:', err));
+  const handleEnableAudio = (enable: boolean) => {
+    if (enable) {
+      // Unlock audio by playing and pausing
+      if (homingAudioRef.current && maloneyAudioRef.current && nycSubwayAudioRef.current) {
+        homingAudioRef.current.play()
+          .then(() => {
+            homingAudioRef.current?.pause();
+            homingAudioRef.current!.currentTime = 0;
+          })
+          .catch(err => console.error('Homing unlock failed:', err));
 
-      maloneyAudioRef.current.play()
-        .then(() => {
-          maloneyAudioRef.current?.pause();
-          maloneyAudioRef.current!.currentTime = 0;
-        })
-        .catch(err => console.error('Maloney unlock failed:', err));
+        maloneyAudioRef.current.play()
+          .then(() => {
+            maloneyAudioRef.current?.pause();
+            maloneyAudioRef.current!.currentTime = 0;
+          })
+          .catch(err => console.error('Maloney unlock failed:', err));
 
-      setShowAudioEnable(false);
+        nycSubwayAudioRef.current.play()
+          .then(() => {
+            nycSubwayAudioRef.current?.pause();
+            nycSubwayAudioRef.current!.currentTime = 0;
+          })
+          .catch(err => console.error('NYC subway unlock failed:', err));
+
+        setMusicEnabled(true);
+      }
+    } else {
+      // Disable audio
+      setMusicEnabled(false);
     }
+    setShowAudioEnable(false);
   };
 
   if (!userProfile) return null;
@@ -955,6 +1064,7 @@ export function GameWorldPage() {
             npcPortrait={currentNpc?.portraitImage}
             onChoice={handleDialogueChoice}
             currentWorld={currentWorld}
+            rootDialogue={rootDialogue}
           />
         )}
 
@@ -978,6 +1088,32 @@ export function GameWorldPage() {
             onBrightnessChange={setBrightness}
             musicEnabled={musicEnabled}
             onMusicToggle={() => setMusicEnabled(prev => !prev)}
+            onAudioToggle={(enabled) => {
+              if (enabled && homingAudioRef.current && maloneyAudioRef.current && nycSubwayAudioRef.current) {
+                // Unlock audio if needed
+                homingAudioRef.current.play()
+                  .then(() => {
+                    homingAudioRef.current?.pause();
+                    homingAudioRef.current!.currentTime = 0;
+                  })
+                  .catch(err => console.error('Homing unlock failed:', err));
+
+                maloneyAudioRef.current.play()
+                  .then(() => {
+                    maloneyAudioRef.current?.pause();
+                    maloneyAudioRef.current!.currentTime = 0;
+                  })
+                  .catch(err => console.error('Maloney unlock failed:', err));
+
+                nycSubwayAudioRef.current.play()
+                  .then(() => {
+                    nycSubwayAudioRef.current?.pause();
+                    nycSubwayAudioRef.current!.currentTime = 0;
+                  })
+                  .catch(err => console.error('NYC subway unlock failed:', err));
+              }
+              setMusicEnabled(enabled);
+            }}
             responses={responses}
             onClose={() => setShowSettings(false)}
           />
@@ -1006,19 +1142,31 @@ export function GameWorldPage() {
           )}
           {currentWorld === 'world2' && (
             <p className="text-sm font-semibold">
-              New York City: {nycWeather.weather} • {nycWeather.hour > 12 ? nycWeather.hour - 12 : nycWeather.hour}:{('0' + (new Date().getMinutes())).slice(-2)}{nycWeather.hour >= 12 ? 'PM' : 'AM'}
+              New York, New York: {nycWeather.weather} • {nycWeather.hour > 12 ? nycWeather.hour - 12 : nycWeather.hour}:{('0' + (new Date().getMinutes())).slice(-2)}{nycWeather.hour >= 12 ? 'PM' : 'AM'}
             </p>
           )}
         </div>
 
         {showAudioEnable && (
-          <button
-            onClick={handleEnableAudio}
-            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-6 py-4 bg-green-500 hover:bg-green-600 text-white rounded-lg shadow-2xl transition-all flex items-center justify-center font-bold text-lg z-50"
-            style={{ fontFamily: 'Helvetica, sans-serif' }}
-          >
-            🔊 Enable Audio
-          </button>
+          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/90 rounded-xl shadow-2xl p-8 z-50 border-2 border-white">
+            <h3 className="text-white text-2xl font-bold font-['Helvetica'] mb-6 text-center">
+              Enable Audio?
+            </h3>
+            <div className="flex gap-4">
+              <button
+                onClick={() => handleEnableAudio(true)}
+                className="px-8 py-4 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold text-lg font-['Helvetica'] transition-all hover:scale-105 transform shadow-xl"
+              >
+                🔊 Yes
+              </button>
+              <button
+                onClick={() => handleEnableAudio(false)}
+                className="px-8 py-4 bg-red-600 hover:bg-red-700 text-white rounded-lg font-bold text-lg font-['Helvetica'] transition-all hover:scale-105 transform shadow-xl"
+              >
+                🔇 No
+              </button>
+            </div>
+          </div>
         )}
       </div>
     </div>

@@ -1,75 +1,164 @@
-// Portia's dialogue tree
+// P.'s dialogue tree
 export const portiaDialogue = {
-  text: 'Hey there. I\'m Portia Rose. What\'s up?',
+  text: "Hey, I'm P. what's up?",
+  speaker: "P.",
   choices: [
     {
-      text: 'What\'s your full name?',
+      text: "When you say \"stud,\" what does that word actually feel like to you?",
       next: {
-        text: 'Portia Lee Rose, but people usually just call me Portia Rose.',
+        text: "Comfortable. Like I stopped performing. Like I finally relaxed into myself.",
+        speaker: "P.",
         choices: [
           {
-            text: 'How do you describe your identity?',
+            text: "So less becoming someone, more uncovering someone?",
             next: {
-              text: 'I\'m a masculine cis woman. Within the Black community, I identify as a stud.',
+              text: "Yeah, exactly. I didn't realize how much I was acting before.",
+              speaker: "P.",
               choices: [
                 {
-                  text: 'How does being a stud show up in how you act or move through the world?',
+                  text: "Was there a moment where you realized, \"Oh, I don't think I'm femme the way I thought I was\"?",
                   next: {
-                    text: 'It shows up in my mannerisms—I feel more assertive and comfortable in myself. But I also question what "masculine" or "feminine" even means.',
+                    text: "Honestly? My ex helped crack that open. She mentioned being attracted to masculine women. And suddenly my brain went: wait… that's allowed?",
+                    speaker: "P.",
                     choices: [
                       {
-                        text: 'What do you mean by questioning those terms?',
+                        text: "It's wild how one tiny sentence from someone can rearrange your whole internal architecture.",
+                        next: null
+                      }
+                    ]
+                  }
+                },
+                {
+                  text: "You mentioned always wanting to be Ken when you played with Barbies. That feels spiritually significant.",
+                  next: {
+                    text: "Right? Looking back I'm like… oh. Tiny me was trying to tell me something. I think I liked the protector role.",
+                    speaker: "P.",
+                    choices: [
+                      {
+                        text: "Kid logic is kind of brutally honest.",
                         next: {
-                          text: 'Like, who decides what\'s masculine or feminine? These labels are socially constructed. I wear what feels right, but I wonder why we categorize things that way at all.',
-                          choices: []
+                          text: "Exactly. I didn't have words for it yet. I just knew what felt right.",
+                          speaker: "P.",
+                          choices: [
+                            {
+                              text: "Did you feel like femininity was something you naturally connected to, or something you learned to perform?",
+                              next: {
+                                text: "Definitely performed. Especially in acting spaces. I thought femininity was the price of acceptance.",
+                                speaker: "P.",
+                                choices: [
+                                  {
+                                    text: "That's the exhausting part — realizing you weren't hiding from other people, you were managing an audience.",
+                                    next: null
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            text: "Like you stopped auditioning for femininity?",
+            next: {
+              text: "I didn't realize how much I was acting before. It felt like I was following instructions I never agreed to.",
+              speaker: "P.",
+              choices: [
+                {
+                  text: "That's the exhausting part — realizing you weren't hiding from other people, you were managing an audience.",
+                  next: null
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      text: "Do you feel like Brooklyn shaped your identity?",
+      next: {
+        text: "Definitely. I see people who look like me. That matters more than people realize.",
+        speaker: "P.",
+        choices: [
+          {
+            text: "Representation but make it neighborhood-specific.",
+            next: {
+              text: "Exactly. I people-watch constantly. Actor brain.",
+              speaker: "P.",
+              choices: [
+                {
+                  text: "Honestly being queer in New York is basically advanced anthropology.",
+                  next: {
+                    text: "That's true. I notice mannerisms immediately. Especially if someone feels familiar somehow.",
+                    speaker: "P.",
+                    choices: [
+                      {
+                        text: "Do you think you'd feel different somewhere else?",
+                        next: {
+                          text: "Probably. I'm used to seeing people like me. I think that's grounding.",
+                          speaker: "P.",
+                          choices: [
+                            {
+                              text: "Sometimes identity isn't just internal — it's environmental. You need mirrors around you.",
+                              next: null
+                            }
+                          ]
                         }
                       },
                       {
-                        text: 'Were you always masculine-presenting?',
+                        text: "You paused earlier before saying the word \"aggressive.\" That hesitation felt important.",
                         next: {
-                          text: 'Not really. I was into sports and theater, but I also internalized ideas of femininity from school and media and tried to fit into that.',
+                          text: "Yeah, because Black studs get stereotyped constantly. I'm hyperaware of how I'm perceived. Sometimes too aware.",
+                          speaker: "P.",
                           choices: [
                             {
-                              text: 'When did that change?',
+                              text: "Like constantly checking your own volume?",
                               next: {
-                                text: 'In my late 20s—around 28 or 29. I started exploring my masculinity more fully. It felt like finally being honest with myself.',
+                                text: "Exactly. I notice everything. Even people moving away from me on the train.",
+                                speaker: "P.",
                                 choices: [
                                   {
-                                    text: 'What did that exploration look like?',
+                                    text: "That sounds exhausting honestly.",
                                     next: {
-                                      text: 'It started with cutting my hair, which felt symbolic. Then came clothing changes, and eventually my mannerisms aligned with how I felt internally.',
+                                      text: "It is. And then you start questioning yourself. Like am I intimidating or am I just existing?",
+                                      speaker: "P.",
                                       choices: [
                                         {
-                                          text: 'That sounds like a journey.',
+                                          text: "Probably existing.",
                                           next: {
-                                            text: 'It was. And it\'s still ongoing. Identity isn\'t static—it evolves.',
-                                            choices: []
+                                            text: "Yeah. And you carry that awareness everywhere. Even when you know it's unfair.",
+                                            speaker: "P.",
+                                            choices: [
+                                              {
+                                                text: "It's hard to relax when the world keeps trying to turn your identity into body language evidence.",
+                                                next: null
+                                              }
+                                            ]
                                           }
                                         },
                                         {
-                                          text: 'Hair can be so symbolic.',
+                                          text: "Society loves projecting onto masculine lesbians.",
                                           next: {
-                                            text: 'Right? Cutting my hair was like shedding a version of myself I was holding onto for others. It was freeing.',
+                                            text: "Especially Black masculine lesbians.",
+                                            speaker: "P.",
                                             choices: []
                                           }
                                         }
                                       ]
                                     }
-                                  },
-                                  {
-                                    text: 'What held you back before that?',
-                                    next: {
-                                      text: 'It felt taboo. I went to traditional schools where being anything other than straight wasn\'t really accepted or discussed.',
-                                      choices: []
-                                    }
                                   }
                                 ]
                               }
                             },
                             {
-                              text: 'So you tried to fit in?',
+                              text: "Like self-surveillance?",
                               next: {
-                                text: 'Yeah. I internalized what I saw in school and media. It took time to unlearn that and be myself.',
+                                text: "Like trying to seem safe before people decide you aren't.",
+                                speaker: "P.",
                                 choices: []
                               }
                             }
@@ -80,78 +169,116 @@ export const portiaDialogue = {
                   }
                 },
                 {
-                  text: 'When did you realize you were a lesbian?',
+                  text: "Everyone's studying each other.",
                   next: {
-                    text: 'I came out at 16, but I knew earlier—around 9 or 10. I remember always wanting to play Ken instead of Barbie.',
+                    text: "Half the city is mutual observation.",
+                    speaker: "P.",
+                    choices: []
+                  }
+                }
+              ]
+            }
+          },
+          {
+            text: "Like spotting someone on the train and instantly understanding the vibe.",
+            next: {
+              text: "A silent 'oh, you too?'",
+              speaker: "P.",
+              choices: []
+            }
+          }
+        ]
+      }
+    },
+    {
+      text: "What's an object that feels deeply tied to you?",
+      next: {
+        text: "My chains. I wear them whenever something matters. Games, stressful moments, anything high stakes.",
+        speaker: "P.",
+        choices: [
+          {
+            text: "So they're jewelry but emotionally they're armor.",
+            next: {
+              text: "Exactly. They make me feel grounded. Protected almost.",
+              speaker: "P.",
+              choices: [
+                {
+                  text: "And they came from your family, right?",
+                  next: {
+                    text: "Yeah. My mom and stepdad gave them to me. My family means everything to me.",
+                    speaker: "P.",
                     choices: [
                       {
-                        text: 'That\'s a clear sign.',
+                        text: "That's really beautiful.",
                         next: {
-                          text: 'Right? Looking back, the signs were always there. I just didn\'t have the language for it yet.',
+                          text: "Yeah. My mom is my rock. Even if she doesn't fully understand everything.",
+                          speaker: "P.",
                           choices: [
                             {
-                              text: 'What drew you to identifying as a stud?',
-                              next: {
-                                text: 'It wasn\'t something I consciously chose—it was always there. But a turning point was when a partner expressed attraction to masculine women, and I realized that identity was possible for me.',
-                                choices: [
-                                  {
-                                    text: 'Why do you think you didn\'t embrace that identity earlier?',
-                                    next: {
-                                      text: 'It felt taboo. I went to traditional schools where being anything other than straight wasn\'t really accepted or discussed.',
-                                      choices: []
-                                    }
-                                  },
-                                  {
-                                    text: 'That partner helped you see yourself.',
-                                    next: {
-                                      text: 'Exactly. Sometimes we need someone else to reflect back to us what was always there.',
-                                      choices: []
-                                    }
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              text: 'Language is so important.',
-                              next: {
-                                text: 'It really is. Having words for who you are—that changes everything.',
-                                choices: []
-                              }
+                              text: "It's kind of incredible when love evolves faster than understanding.",
+                              next: null
                             }
                           ]
                         }
                       },
                       {
-                        text: 'Did you face any stereotypes?',
+                        text: "Especially because acceptance from family isn't guaranteed for everyone.",
                         next: {
-                          text: 'Yes—especially stereotypes about being aggressive or predatory. I\'m very aware of how I\'m perceived, sometimes to the point of overthinking my behavior.',
+                          text: "You can feel the love attached to them.",
+                          speaker: "P.",
+                          choices: []
+                        }
+                      },
+                      {
+                        text: "Outside of identity stuff — who is P.?",
+                        next: {
+                          text: "An actor. A pickleball player. Someone trying to survive and make a difference.",
+                          speaker: "P.",
                           choices: [
                             {
-                              text: 'How do you deal with those perceptions?',
+                              text: "Honestly that's everyone's final form.",
                               next: {
-                                text: 'I try to stay self-aware and reflect on my behavior, but I also recognize that some of it may just be stereotypes or in my head.',
+                                text: "Exactly. I'm more than just being a stud. That's only one piece of me.",
+                                speaker: "P.",
                                 choices: [
                                   {
-                                    text: 'Do stereotypes influence how you see yourself?',
+                                    text: "Do you think people flatten masculine lesbians into archetypes sometimes?",
                                     next: {
-                                      text: 'Yes. I sometimes feel pressure to embody traditional masculine traits like chivalry, even though I know those ideas are outdated.',
-                                      choices: []
-                                    }
-                                  },
-                                  {
-                                    text: 'That sounds exhausting.',
-                                    next: {
-                                      text: 'It can be. But I\'m learning to let go of trying to control how others perceive me.',
-                                      choices: []
+                                      text: "Absolutely. People assume they already know you. Before you even speak.",
+                                      speaker: "P.",
+                                      choices: [
+                                        {
+                                          text: "Meanwhile you're over here carrying family rituals, actor instincts, social anxiety, train observations…",
+                                          next: {
+                                            text: "Exactly. That's why conversations like this matter.",
+                                            speaker: "P.",
+                                            choices: [
+                                              {
+                                                text: "The interesting part is never the label. It's how someone learned to live inside it.",
+                                                next: null
+                                              }
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          text: "People contain way too much for stereotypes.",
+                                          next: {
+                                            text: "Humans are annoyingly layered.",
+                                            speaker: "P.",
+                                            choices: []
+                                          }
+                                        }
+                                      ]
                                     }
                                   }
                                 ]
                               }
                             },
                             {
-                              text: 'Those stereotypes are harmful.',
+                              text: "Just trying to pay bills and emotionally evolve.",
                               next: {
-                                text: 'They really are. They put pressure on us to constantly monitor ourselves and prove we\'re not those things.',
+                                text: "Very human answer.",
+                                speaker: "P.",
                                 choices: []
                               }
                             }
@@ -165,150 +292,10 @@ export const portiaDialogue = {
             }
           },
           {
-            text: 'Nice to meet you, Portia Rose.',
+            text: "Like wearable reassurance.",
             next: {
-              text: 'You too. Thanks for asking.',
-              choices: []
-            }
-          }
-        ]
-      }
-    },
-    {
-      text: 'How has living in New York shaped your identity?',
-      next: {
-        text: 'Being in Brooklyn, especially Flatbush, I see a lot of people who look like me. That representation helps and affirms my identity.',
-        choices: [
-          {
-            text: 'Do you feel like you present differently depending on location?',
-            next: {
-              text: 'Not really—Brooklyn, Manhattan, and even Westchester all feel similar enough that I don\'t change how I present.',
-              choices: [
-                {
-                  text: 'So you\'re consistent everywhere?',
-                  next: {
-                    text: 'Yeah. I\'m just me. I don\'t feel the need to code-switch my presentation based on where I am.',
-                    choices: []
-                  }
-                },
-                {
-                  text: 'That must feel freeing.',
-                  next: {
-                    text: 'It does. I spent enough time hiding—now I just want to be myself.',
-                    choices: []
-                  }
-                }
-              ]
-            }
-          },
-          {
-            text: 'Representation matters.',
-            next: {
-              text: 'It really does. Seeing people who look like me makes me feel less alone and more validated in who I am.',
-              choices: []
-            }
-          }
-        ]
-      }
-    },
-    {
-      text: 'Are there objects that feel tied to your identity?',
-      next: {
-        text: 'My chains. I wear them during games as good luck charms, and they connect me to my family.',
-        choices: [
-          {
-            text: 'What do those objects represent beyond luck?',
-            next: {
-              text: 'They represent my family. My parents gave them to me, and wearing them reminds me of their love and support.',
-              choices: [
-                {
-                  text: 'How important is family to your identity?',
-                  next: {
-                    text: 'Very important. My parents are supportive, and my mom is my rock.',
-                    choices: [
-                      {
-                        text: 'That support must mean everything.',
-                        next: {
-                          text: 'It does. Not everyone has that, and I\'m so grateful. My mom especially—she\'s always been there for me.',
-                          choices: []
-                        }
-                      },
-                      {
-                        text: 'You\'re lucky to have that.',
-                        next: {
-                          text: 'I know. It makes all the difference in being able to be yourself.',
-                          choices: []
-                        }
-                      }
-                    ]
-                  }
-                },
-                {
-                  text: 'That\'s beautiful.',
-                  next: {
-                    text: 'Thanks. They\'re a physical reminder that I\'m loved for who I am.',
-                    choices: []
-                  }
-                }
-              ]
-            }
-          },
-          {
-            text: 'Do you play a sport?',
-            next: {
-              text: 'Yeah, pickleball! I love it. The chains come with me to every game.',
-              choices: [
-                {
-                  text: 'Tell me more about what you do.',
-                  next: {
-                    text: 'I\'m an actor, I play pickleball, and I\'m just trying to be a functional person and make a difference.',
-                    choices: [
-                      {
-                        text: 'Who are you beyond your identity labels?',
-                        next: {
-                          text: 'I\'m an actor, I play pickleball, and I\'m just trying to be a functional person and make a difference.',
-                          choices: []
-                        }
-                      },
-                      {
-                        text: 'That\'s a great approach to life.',
-                        next: {
-                          text: 'Thanks. I think we all just want to live authentically and leave things a little better than we found them.',
-                          choices: []
-                        }
-                      }
-                    ]
-                  }
-                },
-                {
-                  text: 'Pickleball is fun!',
-                  next: {
-                    text: 'Right? It\'s competitive but also just a good time. Great community too.',
-                    choices: []
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      text: 'Who are you beyond your identity labels?',
-      next: {
-        text: 'I\'m an actor, I play pickleball, and I\'m just trying to be a functional person and make a difference.',
-        choices: [
-          {
-            text: 'What kind of acting do you do?',
-            next: {
-              text: 'Whatever I can get! Theater, film, whatever comes my way. It\'s about telling stories and connecting with people.',
-              choices: []
-            }
-          },
-          {
-            text: 'Making a difference matters.',
-            next: {
-              text: 'Yeah. I want to leave things better than I found them, you know? Even if it\'s just in small ways.',
+              text: "Tiny emotional support metal.",
+              speaker: "P.",
               choices: []
             }
           }

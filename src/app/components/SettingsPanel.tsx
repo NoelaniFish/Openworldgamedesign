@@ -5,6 +5,7 @@ interface SettingsPanelProps {
   onBrightnessChange: (value: number) => void;
   musicEnabled: boolean;
   onMusicToggle: () => void;
+  onAudioToggle: (enabled: boolean) => void;
   responses: Array<{ timestamp: string; response: string }>;
   onClose: () => void;
 }
@@ -14,6 +15,7 @@ export function SettingsPanel({
   onBrightnessChange,
   musicEnabled,
   onMusicToggle,
+  onAudioToggle,
   responses,
   onClose,
 }: SettingsPanelProps) {
@@ -83,21 +85,33 @@ export function SettingsPanel({
                 </div>
               </div>
 
-              {/* Music Toggle */}
+              {/* Audio Enable/Disable */}
               <div>
                 <label className="block text-gray-800 text-lg font-medium mb-3">
-                  Background Music
+                  Audio
                 </label>
-                <button
-                  onClick={onMusicToggle}
-                  className={`px-6 py-3 rounded-lg font-medium transition-colors ${
-                    musicEnabled
-                      ? 'bg-green-600 hover:bg-green-700 text-white'
-                      : 'bg-gray-400 hover:bg-gray-500 text-white'
-                  }`}
-                >
-                  {musicEnabled ? 'Music On 🔊' : 'Music Off 🔇'}
-                </button>
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => onAudioToggle(true)}
+                    className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+                      musicEnabled
+                        ? 'bg-green-600 hover:bg-green-700 text-white'
+                        : 'bg-gray-300 hover:bg-gray-400 text-gray-700'
+                    }`}
+                  >
+                    🔊 Enable
+                  </button>
+                  <button
+                    onClick={() => onAudioToggle(false)}
+                    className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+                      !musicEnabled
+                        ? 'bg-red-600 hover:bg-red-700 text-white'
+                        : 'bg-gray-300 hover:bg-gray-400 text-gray-700'
+                    }`}
+                  >
+                    🔇 Disable
+                  </button>
+                </div>
               </div>
             </div>
           ) : (

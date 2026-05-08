@@ -30,7 +30,7 @@ export function WorldSelector({ currentWorld, onWorldSwitch }: WorldSelectorProp
           backgroundColor: currentWorld === 'world2' ? '#1e40af' : undefined
         }}
       >
-        New York City
+        New York, New York
       </button>
     </div>
   );

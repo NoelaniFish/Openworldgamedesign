@@ -10,12 +10,23 @@ export function ProfilePage() {
     // If no world selected, redirect to intro
     if (!selectedWorld) {
       navigate('/intro');
+      return;
+    }
+
+    // If user has already completed profile, redirect to game world
+    const hasCompletedIntro = sessionStorage.getItem('hasCompletedIntro');
+    const userProfile = sessionStorage.getItem('userProfile');
+    if (hasCompletedIntro && userProfile) {
+      const worldPath = selectedWorld === 'world1' ? '/world/knoxville' : '/world/nyc';
+      navigate(worldPath, { replace: true });
     }
   }, [selectedWorld, navigate]);
 
   const handleComplete = (profile: { name: string; identity: string; portrait: string }) => {
     // Store profile in sessionStorage
     sessionStorage.setItem('userProfile', JSON.stringify(profile));
+    // Mark intro as completed
+    sessionStorage.setItem('hasCompletedIntro', 'true');
 
     // Navigate to the selected world
     const worldPath = selectedWorld === 'world1' ? '/world/knoxville' : '/world/nyc';

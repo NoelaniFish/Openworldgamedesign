@@ -87,7 +87,7 @@ export function IntroScreen({ onComplete }: IntroScreenProps) {
               onClick={() => handleWorldSelect('world2')}
               className="px-6 py-3 bg-white hover:bg-gray-200 text-black text-lg font-bold font-['Helvetica'] rounded-lg transition-all hover:scale-110 transform shadow-2xl"
             >
-              New York City
+              New York, New York
             </button>
           </div>
         </div>
@@ -115,7 +115,7 @@ export function IntroScreen({ onComplete }: IntroScreenProps) {
             <button
               className="px-8 py-4 bg-white text-black text-xl font-bold font-['Helvetica'] rounded-lg shadow-2xl"
             >
-              {selectedWorld === 'world1' ? 'Knoxville, Tennessee' : 'New York City'}
+              {selectedWorld === 'world1' ? 'Knoxville, Tennessee' : 'New York, New York'}
             </button>
           </div>
         </div>

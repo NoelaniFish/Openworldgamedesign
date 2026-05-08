@@ -15,9 +15,6 @@ interface NPCProps {
 }
 
 export function NPC({ npc, onClick, isActive, isRevealed = false, world }: NPCProps) {
-  // Debug logging
-  console.log('NPC rendering:', { name: npc.name, hasImage: !!npc.image, imagePath: npc.image });
-
   // Always show image if it exists
   const showImage = npc.image;
   

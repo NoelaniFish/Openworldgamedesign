@@ -1,0 +1,384 @@
+id: "sam_dialogue_map_extended"
+
+START:
+  id: start_01
+  speaker: PLAYER
+  text: "Could you introduce yourself?"
+  responses:
+    - text: "Listen"
+      next: intro_01
+
+identity_branch:
+  - id: intro_01
+    speaker: NPC
+    text: "My name is Sam, I’m 30 years old, and I use any pronouns. I identify as butch, non-binary, and trans. The order changes depending on the day, but I feel strongly connected to all of those identities."
+    responses:
+      - text: "What do you mean when you say the order changes depending on the day?"
+        next: intro_02
+      - text: "Do those identities feel connected or separate for you?"
+        next: intro_03
+
+  - id: intro_02
+    speaker: NPC
+    text: "The order changes depending on the day, but I feel strongly connected to all of those identities."
+    responses:
+      - text: "Have you always felt connected to all of them?"
+        next: butch_01
+      - text: "How do other people usually respond to that?"
+        next: perception_01
+
+  - id: intro_03
+    speaker: NPC
+    text: "I feel strongly connected to all of those identities."
+    responses:
+      - text: "What first drew you toward identifying as butch?"
+        next: butch_01
+      - text: "What aesthetics or practices feel connected to your identity?"
+        next: aesthetics_01
+
+  - id: identity_exit
+    speaker: PLAYER
+    text: "Identity doesn’t always move in a straight line."
+
+aesthetic_branch:
+  - id: aesthetics_01
+    speaker: NPC
+    text: "A lot of the classic queer signifiers feel meaningful to me — things like carabiners or other subtle visual cues that let you recognize another queer person in public."
+    responses:
+      - text: "What do you like about those subtle visual cues?"
+        next: aesthetics_02
+      - text: "Do you think queer people become good at recognizing each other?"
+        next: aesthetics_03
+
+  - id: aesthetics_02
+    speaker: NPC
+    text: "They let you recognize another queer person in public."
+    responses:
+      - text: "Are there other aesthetics that feel important to you?"
+        next: aesthetics_04
+      - text: "Do those objects feel personal or communal?"
+        next: community_01
+
+  - id: aesthetics_03
+    speaker: NPC
+    text: "A lot of the classic queer signifiers feel meaningful to me."
+    responses:
+      - text: "What other visual aesthetics feel affirming?"
+        next: aesthetics_04
+      - text: "Is there comfort in being recognizable to other queer people?"
+        next: perception_03
+
+  - id: aesthetics_04
+    speaker: NPC
+    text: "I also feel really affirmed by “greaser” aesthetics: leather jackets, masculine styling, that kind of vibe. There’s something about it that just makes me happy."
+    responses:
+      - text: "What is it about masculine styling that feels affirming?"
+        next: butch_03
+      - text: "Do you think aesthetics helped you understand your identity?"
+        next: butch_01
+
+  - id: aesthetics_exit
+    speaker: PLAYER
+    text: "Sometimes style becomes its own language."
+
+butch_branch:
+  - id: butch_01
+    speaker: NPC
+    text: "It was a long process. When I first came out as transfemme, I felt a pressure to be feminine in a way that never actually connected with me."
+    responses:
+      - text: "What about it felt disconnected?"
+        next: butch_02
+      - text: "Did you realize that immediately?"
+        next: butch_02
+
+  - id: butch_02
+    speaker: NPC
+    text: "I spent a long time trying to figure out why it felt wrong."
+    responses:
+      - text: "What eventually helped you understand that feeling?"
+        next: butch_03
+      - text: "Did meeting other trans people change things for you?"
+        next: butch_03
+
+  - id: butch_03
+    speaker: NPC
+    text: "Eventually, through therapy and through meeting other trans people, I realized I didn’t really relate to a lot of traditional femininity. At the same time, I felt really drawn toward masculinity and toward other butches."
+    responses:
+      - text: "What was it about butches that you connected to?"
+        next: representation_01
+      - text: "Did masculinity immediately feel more natural?"
+        next: masculinity_01
+
+  - id: butch_exit
+    speaker: PLAYER
+    text: "Realizing something doesn’t fit can take a long time."
+
+representation_branch:
+  - id: representation_01
+    speaker: NPC
+    text: "Definitely. I struggled with not seeing much representation for people like me — especially trans masculine butches or very masculine butches who weren’t strictly binary."
+    responses:
+      - text: "How did that lack of representation affect you?"
+        next: representation_02
+      - text: "Did it make identifying as butch more difficult?"
+        next: representation_02
+
+  - id: representation_02
+    speaker: NPC
+    text: "It took time to understand where I fit and what being butch meant for me personally."
+    responses:
+      - text: "Do you think your understanding of butchness has changed over time?"
+        next: masculinity_02
+      - text: "Did community help clarify that for you?"
+        next: community_01
+
+  - id: representation_03
+    speaker: NPC
+    text: "Especially trans masculine butches or very masculine butches who weren’t strictly binary."
+    responses:
+      - text: "Do you think visibility changes what people believe is possible?"
+        next: community_01
+      - text: "Did you feel isolated growing up?"
+        next: religion_01
+
+  - id: representation_exit
+    speaker: PLAYER
+    text: "Seeing yourself reflected in others can change everything."
+
+religion_branch:
+  - id: religion_01
+    speaker: NPC
+    text: "I grew up Orthodox Jewish, where there was very little queer representation. I didn’t really know any openly queer people growing up."
+    responses:
+      - text: "How did that environment shape the way you saw yourself?"
+        next: religion_02
+      - text: "Did queerness feel distant when you were younger?"
+        next: religion_02
+
+  - id: religion_02
+    speaker: NPC
+    text: "As I became less religious in my early twenties, I also started meeting more queer people."
+    responses:
+      - text: "Did those journeys feel connected to each other?"
+        next: religion_03
+      - text: "Did community become more accessible at that point?"
+        next: community_01
+
+  - id: religion_03
+    speaker: NPC
+    text: "Those journeys happened alongside each other — the less religious I became, the more queer community I found."
+    responses:
+      - text: "Do you think community changed your understanding of yourself?"
+        next: community_02
+      - text: "How has living in New York shaped your identity?"
+        next: nyc_01
+
+  - id: religion_exit
+    speaker: PLAYER
+    text: "Community and identity often grow together."
+
+perception_branch:
+  - id: perception_01
+    speaker: NPC
+    text: "A lot of people assume I’m a trans man because I present very masculine. Sometimes friends even have to correct people about my pronouns."
+    responses:
+      - text: "How do you feel when people make assumptions like that?"
+        next: perception_02
+      - text: "Does that happen often?"
+        next: perception_02
+
+  - id: perception_02
+    speaker: NPC
+    text: "Honestly, I kind of enjoy the confusion. My goal is often to be hard to categorize. That ambiguity feels affirming to me."
+    responses:
+      - text: "What feels affirming about ambiguity?"
+        next: perception_03
+      - text: "Do you intentionally lean into that confusion?"
+        next: perception_04
+
+  - id: perception_03
+    speaker: NPC
+    text: "Being perceived as androgynous or confusing feels affirming."
+    responses:
+      - text: "How does other people’s perception affect your self-image?"
+        next: perception_04
+      - text: "Does that feeling change depending on the environment?"
+        next: safety_01
+
+  - id: perception_04
+    speaker: NPC
+    text: "Sometimes I even lean into that ambiguity intentionally."
+    responses:
+      - text: "Does your presentation change depending on where you are?"
+        next: safety_01
+      - text: "Do queer spaces feel different from unfamiliar environments?"
+        next: nyc_01
+
+  - id: perception_exit
+    speaker: PLAYER
+    text: "Ambiguity can feel like freedom from expectation."
+
+safety_branch:
+  - id: safety_01
+    speaker: NPC
+    text: "In queer spaces, I enjoy presenting as confusing or androgynous."
+    responses:
+      - text: "What changes outside of queer spaces?"
+        next: safety_02
+      - text: "Do queer spaces feel safer for experimentation?"
+        next: nyc_02
+
+  - id: safety_02
+    speaker: NPC
+    text: "Outside of queer spaces, especially in unfamiliar environments, there can be a safety element where being read more masculinely or as a man feels easier."
+    responses:
+      - text: "Do you think safety affects presentation for a lot of queer people?"
+        next: nyc_03
+      - text: "How conscious are you of those adjustments?"
+        next: masculinity_03
+
+  - id: safety_03
+    speaker: NPC
+    text: "Being read more masculinely or as a man feels easier."
+    responses:
+      - text: "Does that feel limiting at all?"
+        next: masculinity_03
+      - text: "Has New York changed that experience for you?"
+        next: nyc_01
+
+  - id: safety_exit
+    speaker: PLAYER
+    text: "Presentation can become tied to survival."
+
+nyc_branch:
+  - id: nyc_01
+    speaker: NPC
+    text: "I think New York has made queerness more visible and accessible for me. There’s a large queer and trans community here, and there are so many events and opportunities to meet people."
+    responses:
+      - text: "How has that visibility affected you personally?"
+        next: nyc_02
+      - text: "Do you think community is easier to find here?"
+        next: community_02
+
+  - id: nyc_02
+    speaker: NPC
+    text: "There’s a large queer and trans community here, and there are so many events and opportunities to meet people."
+    responses:
+      - text: "How do you think New York’s political and social climate affects queer life?"
+        next: nyc_03
+      - text: "Do you think the city allows more freedom in presentation?"
+        next: perception_04
+
+  - id: nyc_03
+    speaker: NPC
+    text: "I think it absolutely makes a difference. New York feels comparatively safer and more community-oriented for queer people. There are more spaces, more events, and more opportunities to connect with others."
+    responses:
+      - text: "Do you think place shapes identity?"
+        next: masculinity_03
+      - text: "Has community changed your relationship to masculinity?"
+        next: masculinity_04
+
+  - id: nyc_exit
+    speaker: PLAYER
+    text: "Place changes what feels possible."
+
+community_branch:
+  - id: community_01
+    speaker: NPC
+    text: "I’m mostly attracted to and drawn toward other masculine or butch people, so many of the people in my life are queer and non-binary in some way."
+    responses:
+      - text: "Do you think your identity shaped the communities around you?"
+        next: community_02
+      - text: "Has queer community changed over time for you?"
+        next: masculinity_02
+
+  - id: community_02
+    speaker: NPC
+    text: "There are more spaces, more events, and more opportunities to connect with others."
+    responses:
+      - text: "What role does community play in your identity now?"
+        next: masculinity_04
+      - text: "Do you think community helped you feel more secure in your identity?"
+        next: masculinity_02
+
+  - id: community_exit
+    speaker: PLAYER
+    text: "Community seems central to the way you understand yourself."
+
+masculinity_branch:
+  - id: masculinity_01
+    speaker: NPC
+    text: "At the same time, I felt really drawn toward masculinity and toward other butches."
+    responses:
+      - text: "What did masculinity represent to you then?"
+        next: masculinity_02
+      - text: "Did your understanding of masculinity shift over time?"
+        next: masculinity_02
+
+  - id: masculinity_02
+    speaker: NPC
+    text: "Even now, I still sometimes question things. I’ve had moments where I wondered whether identifying with masculinity was internalized transphobia or something else. I don’t think it is, but those questions still come up occasionally."
+    responses:
+      - text: "What helps you work through those questions?"
+        next: masculinity_03
+      - text: "Do those doubts feel emotional or intellectual?"
+        next: masculinity_03
+
+  - id: masculinity_03
+    speaker: NPC
+    text: "I don’t think it is, but those questions still come up occasionally."
+    responses:
+      - text: "What does masculinity mean to you now?"
+        next: masculinity_04
+      - text: "Has your relationship to masculinity become more stable?"
+        next: masculinity_04
+
+  - id: masculinity_04
+    speaker: NPC
+    text: "I think I’m still figuring that out. But increasingly, masculinity for me means something protective and community-oriented — showing up for people, helping create safety, and engaging with masculinity in a healthier and more intentional way."
+    responses:
+      - text: "What does 'protective' mean to you?"
+        next: object_01
+      - text: "Do you think queerness changes masculinity?"
+        next: object_01
+
+  - id: masculinity_exit
+    speaker: PLAYER
+    text: "It sounds like masculinity has become something intentional."
+
+object_branch:
+  - id: object_01
+    speaker: NPC
+    text: "The obvious answer is probably the carabiner."
+    responses:
+      - text: "Why do you think that object became such a queer signifier?"
+        next: object_02
+      - text: "Are there objects beyond the carabiner that feel personal?"
+        next: object_03
+
+  - id: object_02
+    speaker: NPC
+    text: "Beyond that, I’m still figuring it out."
+    responses:
+      - text: "Do you think identity is always evolving?"
+        next: object_03
+      - text: "Does uncertainty feel uncomfortable?"
+        next: object_03
+
+  - id: object_03
+    speaker: NPC
+    text: "Maybe my tattoos. I don’t think I have a perfect answer yet."
+    responses:
+      - text: "Maybe there doesn’t need to be a perfect answer."
+        next: end_01
+      - text: "Do you think identity can exist without a fixed symbol?"
+        next: end_01
+
+  - id: object_exit
+    speaker: PLAYER
+    text: "Sometimes identity lives in fragments instead of one symbol."
+
+END:
+  - id: end_01
+    speaker: PLAYER
+    text: "Thank you for sharing your story."

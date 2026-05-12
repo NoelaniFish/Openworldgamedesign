@@ -1,306 +1,123 @@
-// P.'s dialogue tree
+import { getRandomExitLine, getRandomRestartLine, createExitNode, createRestartMarker } from './dialogueHelpers';
+
+const exitNode = createExitNode();
+const restartMarker = createRestartMarker();
+
+// Branch 1: Identity → Family → Brooklyn → Objects → Future aspirations → Stereotypes → Daily life → Deeper truth
+const p1_9a = { text: "Just existing as myself—that's representation. I don't need to make some grand statement, I just need to live authentically and let that ripple out.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_9b = { text: "That moment of connection is everything. I want to be the person I needed to see when I was younger.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_8a = { text: "I want to be visible representation. When I was figuring myself out, seeing other studs just living gave me permission.", speaker: "P.", choices: [{ text: "How do you do that?", next: p1_9a }, { text: "Just by existing?", next: p1_9b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_9c = { text: "There's no moment where I turn off my identity. Someone might be watching, figuring themselves out, needing to see that studs exist doing regular everyday things.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_9d = { text: "That split second where someone sees themselves in you? That's powerful.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_8b = { text: "My daily existence is resistance. Some people physically move away from me now, but I also know some people see me and feel less alone.", speaker: "P.", choices: [{ text: "What moments matter?", next: p1_9c }, { text: "All the time?", next: p1_9d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_7a = { text: "I move through the world differently now. I'm very aware of stereotypes around Black studs being 'aggressive,' but I refuse to make myself smaller to make others comfortable.", speaker: "P.", choices: [{ text: "What's your impact?", next: p1_8a }, { text: "How does that feel?", next: p1_8b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_9e = { text: "When I'm on stage or in the classroom or on the court—I'm the same person. That integration, that wholeness? That's what I was chasing without knowing it for years.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_9f = { text: "No code-switching, no performance. That mental energy I was burning on self-surveillance? I get to use it for creation instead.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_8c = { text: "Everything feels more integrated now. I'm not splitting myself into acceptable pieces anymore.", speaker: "P.", choices: [{ text: "How does that show up?", next: p1_9e }, { text: "Less exhausting?", next: p1_9f }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_9g = { text: "I refuse to shrink myself, but I'm not naive about the risks. I'm strategic about when and how I take up space.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_9h = { text: "That skill that makes me good at acting also keeps me safe in public. It's survival, but it's also just... reality.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_8d = { text: "I navigate threat differently now. The stereotype of the aggressive Black stud precedes me into every room.", speaker: "P.", choices: [{ text: "How do you handle that?", next: p1_9g }, { text: "Always on guard?", next: p1_9h }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_7b = { text: "The freedom comes with a cost. The gaze I receive in public spaces changed completely when I started presenting masculine.", speaker: "P.", choices: [{ text: "How do you navigate that?", next: p1_8c }, { text: "What's the cost?", next: p1_8d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_6a = { text: "My chains. They're gifts from my family—I wear two whenever I play pickleball or before anything high-stakes.", speaker: "P.", choices: [{ text: "That's meaningful.", next: p1_7a }, { text: "Objects matter?", next: p1_7b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_9i = { text: "My haircut was the first visible change. The outside finally caught up to the inside.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_9j = { text: "Each change felt like removing a costume I'd been forced to wear. Not performance anymore, just authenticity.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_8e = { text: "My presentation evolved gradually. Each shift brought me closer to the person I'd been hiding underneath all the performance.", speaker: "P.", choices: [{ text: "What changed first?", next: p1_9i }, { text: "Was it deliberate?", next: p1_9j }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_9k = { text: "That everyday visibility saved me. It showed me this wasn't some impossible fantasy.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_9l = { text: "Watching other studs just live gave me permission. Gave me a blueprint.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_8f = { text: "Brooklyn showed me what was possible. Visibility isn't abstract—it's survival.", speaker: "P.", choices: [{ text: "Where specifically?", next: p1_9k }, { text: "That changed things?", next: p1_9l }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_7c = { text: "Brooklyn is essential to who I am. Growing up surrounded by other Black queer people gave me permission to become myself.", speaker: "P.", choices: [{ text: "How did it help?", next: p1_8e }, { text: "What did you see?", next: p1_8f }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_9m = { text: "My mom is basically my best friend. Their acceptance made everything possible.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_9n = { text: "That foundation of acceptance gave me courage to explore who I really was. Not everyone has that privilege.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_8g = { text: "My family has been supportive. When I started changing my presentation, there was no drama—just acceptance.", speaker: "P.", choices: [{ text: "How did they react?", next: p1_9m }, { text: "Unconditional support?", next: p1_9n }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_9o = { text: "The schools I attended had very narrow ideas about gender and sexuality. I absorbed those expectations and thought success meant conforming.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_9p = { text: "Media fed me one script, school fed me another. I spent years trying to perform that role, thinking survival meant conformity.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_8h = { text: "School was the hard part. The pressure to conform was intense.", speaker: "P.", choices: [{ text: "What was pushing back?", next: p1_9o }, { text: "Everywhere?", next: p1_9p }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_7d = { text: "My family shaped me in important ways. But I still had to navigate schools and media that had very different ideas about who I should be.", speaker: "P.", choices: [{ text: "Tell me about your family.", next: p1_8g }, { text: "What about outside your family?", next: p1_8h }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_6b = { text: "My upbringing was complicated—loving family, harsh institutions. For years I tried to reconcile those two worlds.", speaker: "P.", choices: [{ text: "How did Brooklyn fit in?", next: p1_7c }, { text: "Tell me more about that.", next: p1_7d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_5a = { text: "Being stud is central to who I am. The word 'stud' gave me language for something I'd been feeling but couldn't name.", speaker: "P.", choices: [{ text: "What grounds you?", next: p1_6a }, { text: "Where did you grow up?", next: p1_6b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_4a = { text: "I'm a stud, a masculine cis woman. I came out as a lesbian at 16, but really embracing my masculinity came later in my late twenties.", speaker: "P.", choices: [{ text: "Tell me about that.", next: p1_5a }, { text: "What does that mean to you?", next: p1_5a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_3a = { text: "My identity is about authenticity—letting my outside finally match what I'd been feeling internally. Now I save the performing for the stage.", speaker: "P.", choices: [{ text: "What is your identity?", next: p1_4a }, { text: "Tell me more.", next: p1_4a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p1_2a = { text: "I'm P—a stud, an actor. I'm just trying to be a functional human being and make a difference.", speaker: "P.", choices: [{ text: "Tell me about being a stud.", next: p1_3a }, { text: "What's that identity mean?", next: p1_3a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+
+// Branch 2: 8 choices
+const p2_9a = { text: "Theater, film, whatever comes. I work with kids too and play pickleball.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_9b = { text: "Yeah. It's my passion.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_8a = { text: "I act professionally. Theater's been woven through my whole life since I was young.", speaker: "P.", choices: [{ text: "What kind of acting?", next: p2_9a }, { text: "Is it your career?", next: p2_9b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_9c = { text: "Now I choose projects where I can show up as my full self—masculine, Black, queer, all of it.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_9d = { text: "I want to be that representation for someone else.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_8b = { text: "I want to play queer characters. That recognition is transformative.", speaker: "P.", choices: [{ text: "Why is that important?", next: p2_9c }, { text: "Representation matters?", next: p2_9d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_7a = { text: "Acting is how I express myself. Now those masks are gone—I'm just me, everywhere.", speaker: "P.", choices: [{ text: "What do you act in?", next: p2_8a }, { text: "What roles do you want?", next: p2_8b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_9e = { text: "Now I only perform on stage, not in my daily existence.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_9f = { text: "Being on stage lets me take all that observation and channel it into something real.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_8c = { text: "Theater's been calling me since I was a kid. Authenticity is what makes a performance resonate.", speaker: "P.", choices: [{ text: "Does it feel natural?", next: p2_9e }, { text: "Do you feel alive there?", next: p2_9f }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_9g = { text: "Theater lets me take all that observation and build entire worlds.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_9h = { text: "Now acting is the only performance I do, and it's freed up so much creative energy.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_8d = { text: "Human behavior fascinates me—I'm always watching. Theater gives me a safe container to inhabit different perspectives and tell stories that matter.", speaker: "P.", choices: [{ text: "Explore what?", next: p2_9g }, { text: "Different perspectives?", next: p2_9h }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_7b = { text: "I've always been drawn to athletics and theater. Once I separated performing a role from performing an identity, performance became liberating.", speaker: "P.", choices: [{ text: "Why?", next: p2_8c }, { text: "What does it give you?", next: p2_8d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_6a = { text: "I'm an actor—I work with kids, play pickleball. Acting is definitely a huge part of how I express myself.", speaker: "P.", choices: [{ text: "Tell me about acting.", next: p2_7a }, { text: "What does it mean to you?", next: p2_7b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_9i = { text: "Each part of me shapes the others. They're inseparable.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_9j = { text: "Now I can be authentic in both. My stud identity lets me bring my whole self to my roles.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_8e = { text: "I don't separate who I am from what I do. Now I can bring my whole authentic self to my work.", speaker: "P.", choices: [{ text: "Do they connect?", next: p2_9i }, { text: "They shape each other?", next: p2_9j }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_9k = { text: "Now that the pretense is gone from my daily life, my performances have more truth.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_9l = { text: "Now I feel more comfortable in my body, and that authenticity shows up in everything I do.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_8f = { text: "Every part of my life—my stud identity, working with kids, pickleball, theater—they're all threads in the same fabric. My masculinity informs how I approach roles.", speaker: "P.", choices: [{ text: "How does that show up?", next: p2_9k }, { text: "Authentic performance?", next: p2_9l }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_7c = { text: "I've learned that authenticity is what actually resonates. Being stud and being an actor aren't separate—they're the same truth.", speaker: "P.", choices: [{ text: "How so?", next: p2_8e }, { text: "Tell me about that.", next: p2_8f }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_9m = { text: "I want to play queer characters. Now I want to be that representation for someone else.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_9n = { text: "I want to create that for people like me.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_8g = { text: "I want to tell stories that matter and make space for people like me. That's what drives me as an actor.", speaker: "P.", choices: [{ text: "How do you choose?", next: p2_9m }, { text: "Intentional selection?", next: p2_9n }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_9o = { text: "Now I want to be that for someone else—to show that we exist and we thrive.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_9p = { text: "I understand the weight of invisibility. I want to lift that weight for someone else.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_8h = { text: "My neighborhood showed me that visibility saves lives. Now I want to extend that gift to others through my work.", speaker: "P.", choices: [{ text: "Why?", next: p2_9o }, { text: "For who?", next: p2_9p }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_7d = { text: "I want to create representation, tell stories that matter, make space for people like me. It's all connected to surviving with integrity.", speaker: "P.", choices: [{ text: "How do you approach it?", next: p2_8g }, { text: "What's the purpose?", next: p2_8h }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_6b = { text: "My stud identity informs my art. Only recently have I been able to bring my full, unfiltered self to the work.", speaker: "P.", choices: [{ text: "What is it?", next: p2_7c }, { text: "Tell me more.", next: p2_7d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_5a = { text: "I'm an actor in NYC—theater and film, working with kids, playing pickleball. Acting is how I express myself and create representation.", speaker: "P.", choices: [{ text: "Tell me about your work.", next: p2_6a }, { text: "What drives you?", next: p2_6b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_4a = { text: "I'm constantly observing people—their patterns, their tells, their truths. Being able to channel that into stories and create representation keeps me going.", speaker: "P.", choices: [{ text: "Tell me about it.", next: p2_5a }, { text: "What does that mean?", next: p2_5a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_3a = { text: "Theater was always part of my life growing up. Now I can bring my whole self to my work.", speaker: "P.", choices: [{ text: "Tell me more.", next: p2_4a }, { text: "What's that like?", next: p2_4a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p2_2a = { text: "I do theater and film. Acting lets me explore human experience and create representation for people like me.", speaker: "P.", choices: [{ text: "As an actor?", next: p2_3a }, { text: "Tell me about that.", next: p2_3a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+
+// Branch 3: 8 choices
+const p3_9a = { text: "Just walking down the street and seeing that reflection grounds me. It reminds me I'm not alone.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_9b = { text: "Here, community is everywhere if you know where to look.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_8a = { text: "The visibility in certain neighborhoods cut through my isolation early on. Noticing other masculine-presenting folks just existing—that gave me a blueprint.", speaker: "P.", choices: [{ text: "Where do you find it?", next: p3_9a }, { text: "Is it everywhere?", next: p3_9b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_9c = { text: "Here in Brooklyn, I don't have to constantly second-guess everything. I can just exist.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_9d = { text: "I don't have to explain or justify myself here.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_8b = { text: "Finding queer community outside those institutions—that's what cracked the whole thing open.", speaker: "P.", choices: [{ text: "Does that feel good?", next: p3_9c }, { text: "Less hiding?", next: p3_9d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_7a = { text: "Certain neighborhoods hold concentrated Black queer life, and that visibility saved me. Once I started seeing other masculine-presenting women, isolation gave way to recognition.", speaker: "P.", choices: [{ text: "Tell me about it.", next: p3_8a }, { text: "How does that affect you?", next: p3_8b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_9e = { text: "That daily visibility completely reshaped what I thought was possible for myself.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_9f = { text: "Brooklyn showed me different ways to exist. Representation matters so much.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_8c = { text: "Maybe I take it for granted sometimes—the access to other Black queer folks, the visibility. It's not like that everywhere.", speaker: "P.", choices: [{ text: "Like what?", next: p3_9e }, { text: "Did it change you?", next: p3_9f }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_9g = { text: "Being able to tell stories and create representation here—that's what drives me. I want to make space for people like me.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_9h = { text: "The city taught me the opposite—expansion, not contraction.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_8d = { text: "The theater scene is where I can create the representation that actually changes things.", speaker: "P.", choices: [{ text: "What do you do?", next: p3_9g }, { text: "Is it thriving?", next: p3_9h }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_7b = { text: "Living here opened doors to self-understanding. That everyday visibility gave me examples, gave me language, gave me permission.", speaker: "P.", choices: [{ text: "What doors?", next: p3_8c }, { text: "For your career?", next: p3_8d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_6a = { text: "Noticing other masculine-presenting Black women just living cut through my sense of isolation early.", speaker: "P.", choices: [{ text: "Why?", next: p3_7a }, { text: "How so?", next: p3_7b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_9i = { text: "My neighborhood provided that—actual living proof that this way of being was real and sustainable.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_9j = { text: "Finding people who understood changed everything. That support is everything.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_8e = { text: "Finding queer community outside those institutions changed the trajectory of my life. The neighborhood gave me acceptance, visibility, belonging.", speaker: "P.", choices: [{ text: "Who are your people?", next: p3_9i }, { text: "Is that important?", next: p3_9j }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_9k = { text: "Brooklyn has queer spaces woven throughout. Places where I don't have to explain myself to exist.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_9l = { text: "That casual, everyday representation opened up possibilities I didn't know existed.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_8f = { text: "The visibility—witnessing people carry themselves authentically—made all the difference. It normalized what I thought was impossible.", speaker: "P.", choices: [{ text: "Where do people meet?", next: p3_9k }, { text: "Is it vibrant?", next: p3_9l }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_7c = { text: "Finding queer community outside those walls changed everything. Being around people who get it without explanation—that's survival.", speaker: "P.", choices: [{ text: "Tell me about that.", next: p3_8e }, { text: "What's it like?", next: p3_8f }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_9m = { text: "My neighborhood gave me mirrors when I needed them most.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_9n = { text: "Finding queer community here broke the isolation. It showed me I wasn't alone, wasn't broken, wasn't impossible.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_8g = { text: "That representation was the scaffold I used to build myself.", speaker: "P.", choices: [{ text: "Did you move here?", next: p3_9m }, { text: "It shaped you?", next: p3_9n }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_9o = { text: "Here in Brooklyn I can just exist. I can just be.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_9p = { text: "The city gave me permission to let my exterior finally match my interior truth.", speaker: "P.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_8h = { text: "That visibility didn't just help me figure myself out. It made figuring myself out possible.", speaker: "P.", choices: [{ text: "What do you love?", next: p3_9o }, { text: "Does it fit you?", next: p3_9p }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_7d = { text: "Witnessing other Black studs living their truth transformed my understanding of what was possible for me.", speaker: "P.", choices: [{ text: "How did you get here?", next: p3_8g }, { text: "What does it mean to you?", next: p3_8h }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_6b = { text: "This city gave me access to other Black queer people. That visibility gave me permission to become myself.", speaker: "P.", choices: [{ text: "Tell me about community.", next: p3_7c }, { text: "What does NYC mean to you?", next: p3_7d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_5a = { text: "Noticing other masculine-presenting women just existing—that simple observation shattered my isolation. Visibility is transformative.", speaker: "P.", choices: [{ text: "Why?", next: p3_6a }, { text: "Tell me more.", next: p3_6b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_4a = { text: "Finding queer community here cracked open what I thought was a closed equation. That representation saved me.", speaker: "P.", choices: [{ text: "How so?", next: p3_5a }, { text: "Why?", next: p3_5a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_3a = { text: "The visibility, the casual everyday encounters with people who share my experience—that shaped everything.", speaker: "P.", choices: [{ text: "Does that matter?", next: p3_4a }, { text: "Tell me about that.", next: p3_4a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const p3_2a = { text: "Noticing other masculine-presenting women living openly broke through my isolation in ways I can't overstate.", speaker: "P.", choices: [{ text: "How is that?", next: p3_3a }, { text: "What's that like?", next: p3_3a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+
 export const portiaDialogue = {
-  text: "Hey, I'm P. what's up?",
+  text: "Hey, I'm P. I'm a stud, I'm an actor, and I'm living my truth here in New York. That's the energy.",
   speaker: "P.",
   choices: [
-    {
-      text: "When you say \"stud,\" what does that word actually feel like to you?",
-      next: {
-        text: "Comfortable. Like I stopped performing. Like I finally relaxed into myself.",
-        speaker: "P.",
-        choices: [
-          {
-            text: "So less becoming someone, more uncovering someone?",
-            next: {
-              text: "Yeah, exactly. I didn't realize how much I was acting before.",
-              speaker: "P.",
-              choices: [
-                {
-                  text: "Was there a moment where you realized, \"Oh, I don't think I'm femme the way I thought I was\"?",
-                  next: {
-                    text: "Honestly? My ex helped crack that open. She mentioned being attracted to masculine women. And suddenly my brain went: wait… that's allowed?",
-                    speaker: "P.",
-                    choices: [
-                      {
-                        text: "It's wild how one tiny sentence from someone can rearrange your whole internal architecture.",
-                        next: null
-                      }
-                    ]
-                  }
-                },
-                {
-                  text: "You mentioned always wanting to be Ken when you played with Barbies. That feels spiritually significant.",
-                  next: {
-                    text: "Right? Looking back I'm like… oh. Tiny me was trying to tell me something. I think I liked the protector role.",
-                    speaker: "P.",
-                    choices: [
-                      {
-                        text: "Kid logic is kind of brutally honest.",
-                        next: {
-                          text: "Exactly. I didn't have words for it yet. I just knew what felt right.",
-                          speaker: "P.",
-                          choices: [
-                            {
-                              text: "Did you feel like femininity was something you naturally connected to, or something you learned to perform?",
-                              next: {
-                                text: "Definitely performed. Especially in acting spaces. I thought femininity was the price of acceptance.",
-                                speaker: "P.",
-                                choices: [
-                                  {
-                                    text: "That's the exhausting part — realizing you weren't hiding from other people, you were managing an audience.",
-                                    next: null
-                                  }
-                                ]
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          {
-            text: "Like you stopped auditioning for femininity?",
-            next: {
-              text: "I didn't realize how much I was acting before. It felt like I was following instructions I never agreed to.",
-              speaker: "P.",
-              choices: [
-                {
-                  text: "That's the exhausting part — realizing you weren't hiding from other people, you were managing an audience.",
-                  next: null
-                }
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      text: "Do you feel like Brooklyn shaped your identity?",
-      next: {
-        text: "Definitely. I see people who look like me. That matters more than people realize.",
-        speaker: "P.",
-        choices: [
-          {
-            text: "Representation but make it neighborhood-specific.",
-            next: {
-              text: "Exactly. I people-watch constantly. Actor brain.",
-              speaker: "P.",
-              choices: [
-                {
-                  text: "Honestly being queer in New York is basically advanced anthropology.",
-                  next: {
-                    text: "That's true. I notice mannerisms immediately. Especially if someone feels familiar somehow.",
-                    speaker: "P.",
-                    choices: [
-                      {
-                        text: "Do you think you'd feel different somewhere else?",
-                        next: {
-                          text: "Probably. I'm used to seeing people like me. I think that's grounding.",
-                          speaker: "P.",
-                          choices: [
-                            {
-                              text: "Sometimes identity isn't just internal — it's environmental. You need mirrors around you.",
-                              next: null
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        text: "You paused earlier before saying the word \"aggressive.\" That hesitation felt important.",
-                        next: {
-                          text: "Yeah, because Black studs get stereotyped constantly. I'm hyperaware of how I'm perceived. Sometimes too aware.",
-                          speaker: "P.",
-                          choices: [
-                            {
-                              text: "Like constantly checking your own volume?",
-                              next: {
-                                text: "Exactly. I notice everything. Even people moving away from me on the train.",
-                                speaker: "P.",
-                                choices: [
-                                  {
-                                    text: "That sounds exhausting honestly.",
-                                    next: {
-                                      text: "It is. And then you start questioning yourself. Like am I intimidating or am I just existing?",
-                                      speaker: "P.",
-                                      choices: [
-                                        {
-                                          text: "Probably existing.",
-                                          next: {
-                                            text: "Yeah. And you carry that awareness everywhere. Even when you know it's unfair.",
-                                            speaker: "P.",
-                                            choices: [
-                                              {
-                                                text: "It's hard to relax when the world keeps trying to turn your identity into body language evidence.",
-                                                next: null
-                                              }
-                                            ]
-                                          }
-                                        },
-                                        {
-                                          text: "Society loves projecting onto masculine lesbians.",
-                                          next: {
-                                            text: "Especially Black masculine lesbians.",
-                                            speaker: "P.",
-                                            choices: []
-                                          }
-                                        }
-                                      ]
-                                    }
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              text: "Like self-surveillance?",
-                              next: {
-                                text: "Like trying to seem safe before people decide you aren't.",
-                                speaker: "P.",
-                                choices: []
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                },
-                {
-                  text: "Everyone's studying each other.",
-                  next: {
-                    text: "Half the city is mutual observation.",
-                    speaker: "P.",
-                    choices: []
-                  }
-                }
-              ]
-            }
-          },
-          {
-            text: "Like spotting someone on the train and instantly understanding the vibe.",
-            next: {
-              text: "A silent 'oh, you too?'",
-              speaker: "P.",
-              choices: []
-            }
-          }
-        ]
-      }
-    },
-    {
-      text: "What's an object that feels deeply tied to you?",
-      next: {
-        text: "My chains. I wear them whenever something matters. Games, stressful moments, anything high stakes.",
-        speaker: "P.",
-        choices: [
-          {
-            text: "So they're jewelry but emotionally they're armor.",
-            next: {
-              text: "Exactly. They make me feel grounded. Protected almost.",
-              speaker: "P.",
-              choices: [
-                {
-                  text: "And they came from your family, right?",
-                  next: {
-                    text: "Yeah. My mom and stepdad gave them to me. My family means everything to me.",
-                    speaker: "P.",
-                    choices: [
-                      {
-                        text: "That's really beautiful.",
-                        next: {
-                          text: "Yeah. My mom is my rock. Even if she doesn't fully understand everything.",
-                          speaker: "P.",
-                          choices: [
-                            {
-                              text: "It's kind of incredible when love evolves faster than understanding.",
-                              next: null
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        text: "Especially because acceptance from family isn't guaranteed for everyone.",
-                        next: {
-                          text: "You can feel the love attached to them.",
-                          speaker: "P.",
-                          choices: []
-                        }
-                      },
-                      {
-                        text: "Outside of identity stuff — who is P.?",
-                        next: {
-                          text: "An actor. A pickleball player. Someone trying to survive and make a difference.",
-                          speaker: "P.",
-                          choices: [
-                            {
-                              text: "Honestly that's everyone's final form.",
-                              next: {
-                                text: "Exactly. I'm more than just being a stud. That's only one piece of me.",
-                                speaker: "P.",
-                                choices: [
-                                  {
-                                    text: "Do you think people flatten masculine lesbians into archetypes sometimes?",
-                                    next: {
-                                      text: "Absolutely. People assume they already know you. Before you even speak.",
-                                      speaker: "P.",
-                                      choices: [
-                                        {
-                                          text: "Meanwhile you're over here carrying family rituals, actor instincts, social anxiety, train observations…",
-                                          next: {
-                                            text: "Exactly. That's why conversations like this matter.",
-                                            speaker: "P.",
-                                            choices: [
-                                              {
-                                                text: "The interesting part is never the label. It's how someone learned to live inside it.",
-                                                next: null
-                                              }
-                                            ]
-                                          }
-                                        },
-                                        {
-                                          text: "People contain way too much for stereotypes.",
-                                          next: {
-                                            text: "Humans are annoyingly layered.",
-                                            speaker: "P.",
-                                            choices: []
-                                          }
-                                        }
-                                      ]
-                                    }
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              text: "Just trying to pay bills and emotionally evolve.",
-                              next: {
-                                text: "Very human answer.",
-                                speaker: "P.",
-                                choices: []
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          {
-            text: "Like wearable reassurance.",
-            next: {
-              text: "Tiny emotional support metal.",
-              speaker: "P.",
-              choices: []
-            }
-          }
-        ]
-      }
-    }
+    { text: "Tell me about being a stud.", next: p1_2a },
+    { text: "What's it like being an actor?", next: p2_2a },
+    { text: "How does living in NYC shape you?", next: p3_2a },
+    { text: getRandomExitLine(), next: exitNode }
   ]
 };

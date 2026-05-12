@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { GameWorld } from '../components/GameWorld';
 import { DialogueBox } from '../components/DialogueBox';
@@ -9,10 +9,19 @@ import { SettingsPanel } from '../components/SettingsPanel';
 import { npcsWorld1, npcsWorld2, nycCharacters, knoxvilleCharacters } from '../components/npcData';
 import { useKnoxvilleWeather } from '../hooks/useKnoxvilleWeather';
 import { useNYCWeather } from '../hooks/useNYCWeather';
+import { useIsMobile } from '../hooks/useIsMobile';
 import { treeFacts } from '../components/treeFacts';
 import homingSound from '../imports/homing.mp3';
 import maloneyRdSound from '../imports/Maloney_Rd_2.mp3';
 import nycSubwaySound from '../imports/757583__thel200ster__nyc-subway-sept-24.mp3';
+
+// Helper function to check if two objects overlap
+const checkOverlap = (x1: number, y1: number, x2: number, y2: number, minDistance: number) => {
+  const dx = x1 - x2;
+  const dy = y1 - y2;
+  const distance = Math.sqrt(dx * dx + dy * dy);
+  return distance < minDistance;
+};
 
 // Generate trees of knowledge (8-12 trees)
 const generateTrees = () => {
@@ -21,11 +30,25 @@ const generateTrees = () => {
 
   for (let i = 0; i < treeCount; i++) {
     const factIndex = Math.floor(Math.random() * treeFacts.length);
+    let x, y;
+    let attempts = 0;
+    const maxAttempts = 50;
+
+    // Keep trying to place tree until we find a spot that doesn't overlap
+    do {
+      x = Math.random() * 2360 + 100;
+      y = Math.random() * 1240 + 100;
+      attempts++;
+    } while (
+      attempts < maxAttempts &&
+      trees.some(tree => checkOverlap(x, y, tree.x, tree.y, 180))
+    );
+
     trees.push({
       id: `tree-${i}`,
       type: 'tree' as const,
-      x: Math.random() * 2360 + 100,
-      y: Math.random() * 1240 + 100,
+      x,
+      y,
       treeVariant: Math.floor(Math.random() * 5),
       factIndex
     });
@@ -36,7 +59,7 @@ const generateTrees = () => {
 };
 
 // Generate random blockades (2-6 of them)
-const generateBlockades = () => {
+const generateBlockades = (trees: any[]) => {
   const animalCount = Math.floor(Math.random() * 5) + 2;
   const flockCount = Math.floor(Math.random() * 7) + 2;
   const birdCount = Math.floor(Math.random() * 5) + 2;
@@ -44,29 +67,71 @@ const generateBlockades = () => {
   const blockades = [];
 
   for (let i = 0; i < animalCount; i++) {
+    let x, y;
+    let attempts = 0;
+    const maxAttempts = 50;
+
+    do {
+      x = Math.random() * 2360 + 100;
+      y = Math.random() * 1240 + 100;
+      attempts++;
+    } while (
+      attempts < maxAttempts &&
+      (trees.some(tree => checkOverlap(x, y, tree.x, tree.y, 150)) ||
+       blockades.some(blockade => checkOverlap(x, y, blockade.x, blockade.y, 100)))
+    );
+
     blockades.push({
       id: `blockade-${i}`,
       type: animalTypes[Math.floor(Math.random() * animalTypes.length)],
-      x: Math.random() * 2360 + 100,
-      y: Math.random() * 1240 + 100
+      x,
+      y
     });
   }
 
   for (let i = 0; i < flockCount; i++) {
+    let x, y;
+    let attempts = 0;
+    const maxAttempts = 50;
+
+    do {
+      x = Math.random() * 2360 + 100;
+      y = Math.random() * 1240 + 100;
+      attempts++;
+    } while (
+      attempts < maxAttempts &&
+      (trees.some(tree => checkOverlap(x, y, tree.x, tree.y, 150)) ||
+       blockades.some(blockade => checkOverlap(x, y, blockade.x, blockade.y, 100)))
+    );
+
     blockades.push({
       id: `blockade-flock-${i}`,
       type: 'flock' as const,
-      x: Math.random() * 2360 + 100,
-      y: Math.random() * 1240 + 100
+      x,
+      y
     });
   }
 
   for (let i = 0; i < birdCount; i++) {
+    let x, y;
+    let attempts = 0;
+    const maxAttempts = 50;
+
+    do {
+      x = Math.random() * 2360 + 100;
+      y = Math.random() * 1240 + 100;
+      attempts++;
+    } while (
+      attempts < maxAttempts &&
+      (trees.some(tree => checkOverlap(x, y, tree.x, tree.y, 150)) ||
+       blockades.some(blockade => checkOverlap(x, y, blockade.x, blockade.y, 100)))
+    );
+
     blockades.push({
       id: `blockade-bird-${i}`,
       type: 'bird' as const,
-      x: Math.random() * 2360 + 100,
-      y: Math.random() * 1240 + 100
+      x,
+      y
     });
   }
 
@@ -98,36 +163,78 @@ const generateKnoxvilleCars = () => {
 };
 
 // Generate random pigeons for NYC
-const generatePigeons = () => {
+const generatePigeons = (trees: any[]) => {
   const pigeonCount = Math.floor(Math.random() * 5) + 2;
   const pigeonPairCount = Math.floor(Math.random() * 4) + 2;
   const pigeonFlockCount = Math.floor(Math.random() * 5) + 2;
   const pigeons = [];
 
   for (let i = 0; i < pigeonCount; i++) {
+    let x, y;
+    let attempts = 0;
+    const maxAttempts = 50;
+
+    do {
+      x = Math.random() * 2360 + 100;
+      y = Math.random() * 1240 + 100;
+      attempts++;
+    } while (
+      attempts < maxAttempts &&
+      (trees.some(tree => checkOverlap(x, y, tree.x, tree.y, 150)) ||
+       pigeons.some(pigeon => checkOverlap(x, y, pigeon.x, pigeon.y, 100)))
+    );
+
     pigeons.push({
       id: `pigeon-${i}`,
       type: 'pigeon' as const,
-      x: Math.random() * 2360 + 100,
-      y: Math.random() * 1240 + 100
+      x,
+      y
     });
   }
 
   for (let i = 0; i < pigeonPairCount; i++) {
+    let x, y;
+    let attempts = 0;
+    const maxAttempts = 50;
+
+    do {
+      x = Math.random() * 2360 + 100;
+      y = Math.random() * 1240 + 100;
+      attempts++;
+    } while (
+      attempts < maxAttempts &&
+      (trees.some(tree => checkOverlap(x, y, tree.x, tree.y, 150)) ||
+       pigeons.some(pigeon => checkOverlap(x, y, pigeon.x, pigeon.y, 100)))
+    );
+
     pigeons.push({
       id: `pigeon-pair-${i}`,
       type: 'pigeonPair' as const,
-      x: Math.random() * 2360 + 100,
-      y: Math.random() * 1240 + 100
+      x,
+      y
     });
   }
 
   for (let i = 0; i < pigeonFlockCount; i++) {
+    let x, y;
+    let attempts = 0;
+    const maxAttempts = 50;
+
+    do {
+      x = Math.random() * 2360 + 100;
+      y = Math.random() * 1240 + 100;
+      attempts++;
+    } while (
+      attempts < maxAttempts &&
+      (trees.some(tree => checkOverlap(x, y, tree.x, tree.y, 150)) ||
+       pigeons.some(pigeon => checkOverlap(x, y, pigeon.x, pigeon.y, 100)))
+    );
+
     pigeons.push({
       id: `pigeon-flock-${i}`,
       type: 'pigeonFlock' as const,
-      x: Math.random() * 2360 + 100,
-      y: Math.random() * 1240 + 100
+      x,
+      y
     });
   }
 
@@ -135,16 +242,31 @@ const generatePigeons = () => {
 };
 
 // Generate random rats for NYC
-const generateRats = () => {
+const generateRats = (trees: any[], pigeons: any[]) => {
   const ratCount = Math.floor(Math.random() * 4) + 3;
   const rats = [];
 
   for (let i = 0; i < ratCount; i++) {
+    let x, y;
+    let attempts = 0;
+    const maxAttempts = 50;
+
+    do {
+      x = Math.random() * 2360 + 100;
+      y = Math.random() * 1240 + 100;
+      attempts++;
+    } while (
+      attempts < maxAttempts &&
+      (trees.some(tree => checkOverlap(x, y, tree.x, tree.y, 150)) ||
+       pigeons.some(pigeon => checkOverlap(x, y, pigeon.x, pigeon.y, 100)) ||
+       rats.some(rat => checkOverlap(x, y, rat.x, rat.y, 100)))
+    );
+
     rats.push({
       id: `rat-${i}`,
       type: 'rat' as const,
-      x: Math.random() * 2360 + 100,
-      y: Math.random() * 1240 + 100
+      x,
+      y
     });
   }
 
@@ -155,6 +277,7 @@ export function GameWorldPage() {
   const navigate = useNavigate();
   const { world } = useParams<{ world: 'knoxville' | 'nyc' }>();
   const currentWorld: 'world1' | 'world2' = world === 'knoxville' ? 'world1' : 'world2';
+  const isMobile = useIsMobile();
 
   // Load user profile
   const userProfileStr = sessionStorage.getItem('userProfile');
@@ -180,12 +303,12 @@ export function GameWorldPage() {
   const knoxvilleWeather = useKnoxvilleWeather();
   const nycWeather = useNYCWeather();
 
-  const [trees] = useState(generateTrees());
+  const [trees] = useState(() => generateTrees());
   const [selectedTreeFact, setSelectedTreeFact] = useState<string | null>(null);
   const [showNotepad, setShowNotepad] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [brightness, setBrightness] = useState(1.0);
-  const [musicEnabled, setMusicEnabled] = useState(true);
+  const [musicEnabled, setMusicEnabled] = useState(isMobile);
   const [responses, setResponses] = useState<Array<{ timestamp: string; response: string }>>([]);
 
   const homingAudioRef = useRef<HTMLAudioElement | null>(null);
@@ -195,15 +318,16 @@ export function GameWorldPage() {
   const isPlayingMaloneyRef = useRef(false);
   const isPlayingNycSubwayRef = useRef(false);
 
-  const [showAudioEnable, setShowAudioEnable] = useState(true);
+  const [showAudioEnable, setShowAudioEnable] = useState(!isMobile);
   const [controlsTimer, setControlsTimer] = useState<NodeJS.Timeout | null>(null);
   const [shownNYCCharacters, setShownNYCCharacters] = useState<Set<string>>(new Set());
   const [shownKnoxvilleCharacters, setShownKnoxvilleCharacters] = useState<Set<string>>(new Set());
+  const [touchTarget, setTouchTarget] = useState<{ x: number; y: number } | null>(null);
 
-  const [blockades] = useState(generateBlockades());
+  const [blockades] = useState(() => generateBlockades(trees));
   const [knoxvilleCars] = useState(generateKnoxvilleCars());
-  const [pigeons] = useState(generatePigeons());
-  const [rats] = useState(generateRats());
+  const [pigeons] = useState(() => generatePigeons(trees));
+  const [rats] = useState(() => generateRats(trees, pigeons));
 
   const [blockadePositions, setBlockadePositions] = useState<Record<string, { x: number; y: number; vx: number; vy: number }>>(() => {
     const positions: Record<string, { x: number; y: number; vx: number; vy: number }> = {};
@@ -258,44 +382,48 @@ export function GameWorldPage() {
     return positions;
   });
 
-  const currentNpcs = (currentWorld === 'world1' ? npcsWorld1 : npcsWorld2).map(npc => ({
-    ...npc,
-    x: npcPositions[npc.id]?.x ?? npc.x,
-    y: npcPositions[npc.id]?.y ?? npc.y
-  }));
+  const currentNpcs = useMemo(() =>
+    (currentWorld === 'world1' ? npcsWorld1 : npcsWorld2).map(npc => ({
+      ...npc,
+      x: npcPositions[npc.id]?.x ?? npc.x,
+      y: npcPositions[npc.id]?.y ?? npc.y
+    })), [currentWorld, npcPositions]
+  );
 
-  // Debug: Log NPC count
-  useEffect(() => {
-    console.log(`Current world: ${currentWorld}, NPC count: ${currentNpcs.length}`);
-    console.log('First NPC:', currentNpcs[0]);
-  }, [currentWorld, currentNpcs]);
+  const currentBlockades = useMemo(() =>
+    blockades.map(blockade => ({
+      ...blockade,
+      x: blockadePositions[blockade.id]?.x ?? blockade.x,
+      y: blockadePositions[blockade.id]?.y ?? blockade.y
+    })), [blockades, blockadePositions]
+  );
 
-  const currentBlockades = blockades.map(blockade => ({
-    ...blockade,
-    x: blockadePositions[blockade.id]?.x ?? blockade.x,
-    y: blockadePositions[blockade.id]?.y ?? blockade.y
-  }));
+  const currentPigeons = useMemo(() =>
+    pigeons.map(pigeon => ({
+      ...pigeon,
+      x: pigeonPositions[pigeon.id]?.x ?? pigeon.x,
+      y: pigeonPositions[pigeon.id]?.y ?? pigeon.y
+    })), [pigeons, pigeonPositions]
+  );
 
-  const currentPigeons = pigeons.map(pigeon => ({
-    ...pigeon,
-    x: pigeonPositions[pigeon.id]?.x ?? pigeon.x,
-    y: pigeonPositions[pigeon.id]?.y ?? pigeon.y
-  }));
+  const currentRats = useMemo(() =>
+    rats.map(rat => ({
+      ...rat,
+      x: pigeonPositions[rat.id]?.x ?? rat.x,
+      y: pigeonPositions[rat.id]?.y ?? rat.y
+    })), [rats, pigeonPositions]
+  );
 
-  const currentRats = rats.map(rat => ({
-    ...rat,
-    x: pigeonPositions[rat.id]?.x ?? rat.x,
-    y: pigeonPositions[rat.id]?.y ?? rat.y
-  }));
-
-  const currentCars = [...knoxvilleCars].map(car => ({
-    ...car,
-    x: carPositions[car.id]?.x ?? car.x,
-    y: carPositions[car.id]?.y ?? car.y,
-    vx: carPositions[car.id]?.vx ?? car.vx,
-    vy: carPositions[car.id]?.vy ?? car.vy,
-    flipped: carPositions[car.id]?.flipped ?? false
-  }));
+  const currentCars = useMemo(() =>
+    knoxvilleCars.map(car => ({
+      ...car,
+      x: carPositions[car.id]?.x ?? car.x,
+      y: carPositions[car.id]?.y ?? car.y,
+      vx: carPositions[car.id]?.vx ?? car.vx,
+      vy: carPositions[car.id]?.vy ?? car.vy,
+      flipped: carPositions[car.id]?.flipped ?? false
+    })), [knoxvilleCars, carPositions]
+  );
 
   // Initialize audio on mount
   useEffect(() => {
@@ -352,14 +480,12 @@ export function GameWorldPage() {
 
   // Show controls for 30 seconds when exiting dialogue
   useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+
     if (!currentDialogue && !showControls) {
       setShowControls(true);
 
-      if (controlsTimer) {
-        clearTimeout(controlsTimer);
-      }
-
-      const timer = setTimeout(() => {
+      timer = setTimeout(() => {
         setShowControls(false);
       }, 30000);
 
@@ -368,20 +494,24 @@ export function GameWorldPage() {
 
     if (currentDialogue) {
       setShowControls(false);
+      if (controlsTimer) {
+        clearTimeout(controlsTimer);
+        setControlsTimer(null);
+      }
     }
 
     return () => {
-      if (controlsTimer) {
-        clearTimeout(controlsTimer);
+      if (timer) {
+        clearTimeout(timer);
       }
     };
-  }, [currentDialogue]);
+  }, [currentDialogue, showControls]);
 
   // Bird encounter detection in NYC
   useEffect(() => {
     if (!homingAudioRef.current) return;
 
-    if (currentWorld !== 'world2') {
+    if (currentWorld !== 'world2' || !musicEnabled) {
       if (isPlayingHomingRef.current) {
         homingAudioRef.current.pause();
         homingAudioRef.current.currentTime = 0;
@@ -413,62 +543,41 @@ export function GameWorldPage() {
       homingAudioRef.current.currentTime = 0;
       isPlayingHomingRef.current = false;
     }
-  }, [player.x, player.y, currentPigeons, currentWorld]);
+  }, [player.x, player.y, currentPigeons, currentWorld, musicEnabled]);
 
-  // Animal encounter detection in Knoxville
+  // Knoxville background audio (Maloney Rd)
   useEffect(() => {
     if (!maloneyAudioRef.current) return;
 
-    if (currentWorld !== 'world1') {
-      if (isPlayingMaloneyRef.current) {
-        maloneyAudioRef.current.pause();
-        maloneyAudioRef.current.currentTime = 0;
-        isPlayingMaloneyRef.current = false;
-      }
-      return;
-    }
-
-    let nearAnimal = false;
-    for (const animal of currentBlockades) {
-      const dx = player.x - animal.x;
-      const dy = player.y - animal.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      if (distance < 100) {
-        nearAnimal = true;
-        break;
-      }
-    }
-
-    if (nearAnimal && !isPlayingMaloneyRef.current) {
+    if (currentWorld === 'world1' && musicEnabled && !isPlayingMaloneyRef.current) {
       maloneyAudioRef.current.play()
         .then(() => {
           isPlayingMaloneyRef.current = true;
         })
         .catch(err => console.error('Maloney audio play failed:', err));
-    } else if (!nearAnimal && isPlayingMaloneyRef.current) {
+    } else if ((currentWorld !== 'world1' || !musicEnabled) && isPlayingMaloneyRef.current) {
       maloneyAudioRef.current.pause();
       maloneyAudioRef.current.currentTime = 0;
       isPlayingMaloneyRef.current = false;
     }
-  }, [player.x, player.y, currentBlockades, currentWorld]);
+  }, [currentWorld, musicEnabled]);
 
   // NYC subway background audio
   useEffect(() => {
     if (!nycSubwayAudioRef.current) return;
 
-    if (currentWorld === 'world2' && !isPlayingNycSubwayRef.current) {
+    if (currentWorld === 'world2' && musicEnabled && !isPlayingNycSubwayRef.current) {
       nycSubwayAudioRef.current.play()
         .then(() => {
           isPlayingNycSubwayRef.current = true;
         })
         .catch(err => console.error('NYC subway audio play failed:', err));
-    } else if (currentWorld !== 'world2' && isPlayingNycSubwayRef.current) {
+    } else if ((currentWorld !== 'world2' || !musicEnabled) && isPlayingNycSubwayRef.current) {
       nycSubwayAudioRef.current.pause();
       nycSubwayAudioRef.current.currentTime = 0;
       isPlayingNycSubwayRef.current = false;
     }
-  }, [currentWorld]);
+  }, [currentWorld, musicEnabled]);
 
   // Blockade wandering logic
   useEffect(() => {
@@ -584,6 +693,57 @@ export function GameWorldPage() {
           let newVx = pos.vx;
           let newVy = pos.vy;
 
+          // Check collision with trees
+          for (const tree of trees) {
+            const dx = newX - tree.x;
+            const dy = newY - tree.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 120) {
+              // Push NPC away from tree
+              const angle = Math.atan2(dy, dx);
+              const pushStrength = (120 - distance) / 120;
+              newVx += Math.cos(angle) * pushStrength * 2;
+              newVy += Math.sin(angle) * pushStrength * 2;
+              newX = tree.x + Math.cos(angle) * 120;
+              newY = tree.y + Math.sin(angle) * 120;
+            }
+          }
+
+          // Check collision with blockades
+          for (const blockade of currentBlockades) {
+            const dx = newX - blockade.x;
+            const dy = newY - blockade.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 90) {
+              // Push NPC away from blockade
+              const angle = Math.atan2(dy, dx);
+              const pushStrength = (90 - distance) / 90;
+              newVx += Math.cos(angle) * pushStrength * 2;
+              newVy += Math.sin(angle) * pushStrength * 2;
+              newX = blockade.x + Math.cos(angle) * 90;
+              newY = blockade.y + Math.sin(angle) * 90;
+            }
+          }
+
+          // Check collision with other NPCs
+          Object.keys(newPositions).forEach(otherNpcId => {
+            if (otherNpcId === npcId) return;
+            const otherPos = newPositions[otherNpcId];
+            const dx = newX - otherPos.x;
+            const dy = newY - otherPos.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 70) {
+              // Push NPCs away from each other
+              const angle = Math.atan2(dy, dx);
+              const pushStrength = (70 - distance) / 70;
+              newVx += Math.cos(angle) * pushStrength * 1.5;
+              newVy += Math.sin(angle) * pushStrength * 1.5;
+            }
+          });
+
           if (newX < 100 || newX > 1900) {
             newVx = -newVx + (Math.random() - 0.5) * 0.2;
             newX = Math.max(100, Math.min(1900, newX));
@@ -618,7 +778,7 @@ export function GameWorldPage() {
 
     const interval = setInterval(moveNpcs, 50);
     return () => clearInterval(interval);
-  }, []);
+  }, [trees, currentBlockades]);
 
   // Car driving logic
   useEffect(() => {
@@ -785,6 +945,33 @@ export function GameWorldPage() {
     };
   }, [currentDialogue]);
 
+  // Touch controls for mobile
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const handleTouch = (e: TouchEvent) => {
+      if (currentDialogue) return;
+
+      const touch = e.touches[0];
+      const worldElement = document.querySelector('[data-world]') as HTMLElement;
+      if (!worldElement) return;
+
+      const rect = worldElement.getBoundingClientRect();
+      const scaleX = 2560 / rect.width;
+      const scaleY = 1440 / rect.height;
+
+      const worldX = (touch.clientX - rect.left) * scaleX;
+      const worldY = (touch.clientY - rect.top) * scaleY;
+
+      setTouchTarget({ x: worldX, y: worldY });
+    };
+
+    window.addEventListener('touchstart', handleTouch);
+    return () => {
+      window.removeEventListener('touchstart', handleTouch);
+    };
+  }, [isMobile, currentDialogue]);
+
   useEffect(() => {
     const movePlayer = () => {
       setPlayer(prev => {
@@ -793,6 +980,31 @@ export function GameWorldPage() {
         const speed = 1.5;
         let moved = false;
 
+        // Touch controls for mobile
+        if (isMobile && touchTarget) {
+          const dx = touchTarget.x - prev.x;
+          const dy = touchTarget.y - prev.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance > 5) {
+            const moveSpeed = Math.min(speed, distance / 10);
+            newX += (dx / distance) * moveSpeed;
+            newY += (dy / distance) * moveSpeed;
+            moved = true;
+
+            // Set facing direction based on movement
+            if (dx < 0) {
+              setFacingLeft(true);
+            } else if (dx > 0) {
+              setFacingLeft(false);
+            }
+          } else {
+            // Reached target, stop moving
+            setTouchTarget(null);
+          }
+        }
+
+        // Keyboard controls for desktop
         if (keysPressed.has('w') || keysPressed.has('arrowup')) {
           newY -= speed;
           moved = true;
@@ -863,7 +1075,7 @@ export function GameWorldPage() {
 
     const interval = setInterval(movePlayer, 16);
     return () => clearInterval(interval);
-  }, [keysPressed, currentWorld, currentBlockades, currentPigeons, currentRats]);
+  }, [keysPressed, currentWorld, currentBlockades, currentPigeons, currentRats, touchTarget, isMobile]);
 
   const handleNpcClick = (npc: any) => {
     const distance = Math.sqrt(
@@ -934,7 +1146,19 @@ export function GameWorldPage() {
 
   const handleDialogueChoice = (nextDialogue: any) => {
     if (nextDialogue) {
-      setCurrentDialogue(nextDialogue);
+      // Check if this is a restart marker
+      if (nextDialogue.__restart) {
+        setCurrentDialogue(rootDialogue);
+      }
+      // Check if this is an exit marker
+      else if (nextDialogue.__exit) {
+        setCurrentDialogue(null);
+        setCurrentNpc(null);
+        setRootDialogue(null);
+      }
+      else {
+        setCurrentDialogue(nextDialogue);
+      }
     } else {
       setCurrentDialogue(null);
       setCurrentNpc(null);
@@ -985,35 +1209,61 @@ export function GameWorldPage() {
     setResponses(prev => [...prev, { timestamp, response }]);
   };
 
-  const handleEnableAudio = (enable: boolean) => {
-    if (enable) {
-      // Unlock audio by playing and pausing
-      if (homingAudioRef.current && maloneyAudioRef.current && nycSubwayAudioRef.current) {
+  // Unlock audio by playing and pausing all sources
+  const unlockAudio = useCallback(() => {
+    const unlockPromises = [];
+
+    if (homingAudioRef.current) {
+      isPlayingHomingRef.current = false;
+      unlockPromises.push(
         homingAudioRef.current.play()
           .then(() => {
-            homingAudioRef.current?.pause();
-            homingAudioRef.current!.currentTime = 0;
+            if (homingAudioRef.current) {
+              homingAudioRef.current.pause();
+              homingAudioRef.current.currentTime = 0;
+            }
           })
-          .catch(err => console.error('Homing unlock failed:', err));
+          .catch(err => console.error('Homing unlock failed:', err))
+      );
+    }
 
+    if (maloneyAudioRef.current) {
+      isPlayingMaloneyRef.current = false;
+      unlockPromises.push(
         maloneyAudioRef.current.play()
           .then(() => {
-            maloneyAudioRef.current?.pause();
-            maloneyAudioRef.current!.currentTime = 0;
+            if (maloneyAudioRef.current) {
+              maloneyAudioRef.current.pause();
+              maloneyAudioRef.current.currentTime = 0;
+            }
           })
-          .catch(err => console.error('Maloney unlock failed:', err));
+          .catch(err => console.error('Maloney unlock failed:', err))
+      );
+    }
 
+    if (nycSubwayAudioRef.current) {
+      isPlayingNycSubwayRef.current = false;
+      unlockPromises.push(
         nycSubwayAudioRef.current.play()
           .then(() => {
-            nycSubwayAudioRef.current?.pause();
-            nycSubwayAudioRef.current!.currentTime = 0;
+            if (nycSubwayAudioRef.current) {
+              nycSubwayAudioRef.current.pause();
+              nycSubwayAudioRef.current.currentTime = 0;
+            }
           })
-          .catch(err => console.error('NYC subway unlock failed:', err));
+          .catch(err => console.error('NYC subway unlock failed:', err))
+      );
+    }
 
+    return Promise.all(unlockPromises);
+  }, []);
+
+  const handleEnableAudio = (enable: boolean) => {
+    if (enable) {
+      unlockAudio().finally(() => {
         setMusicEnabled(true);
-      }
+      });
     } else {
-      // Disable audio
       setMusicEnabled(false);
     }
     setShowAudioEnable(false);
@@ -1025,10 +1275,10 @@ export function GameWorldPage() {
     <div
       className="relative overflow-hidden w-screen h-screen"
       style={{
-        filter: `brightness(${brightness})`,
+        filter: isMobile ? 'none' : `brightness(${brightness})`,
       }}
     >
-      <div className="relative">
+      <div className="relative" data-world="true">
         <GameWorld
           playerPos={player}
           npcs={currentNpcs}
@@ -1055,6 +1305,7 @@ export function GameWorldPage() {
         <WorldSelector
           currentWorld={currentWorld}
           onWorldSwitch={handleWorldSwitch}
+          isMobile={isMobile}
         />
 
         {currentDialogue && (
@@ -1065,6 +1316,7 @@ export function GameWorldPage() {
             onChoice={handleDialogueChoice}
             currentWorld={currentWorld}
             rootDialogue={rootDialogue}
+            isMobile={isMobile}
           />
         )}
 
@@ -1072,6 +1324,7 @@ export function GameWorldPage() {
           <TreeFactModal
             fact={selectedTreeFact}
             onClose={() => setSelectedTreeFact(null)}
+            isMobile={isMobile}
           />
         )}
 
@@ -1079,75 +1332,77 @@ export function GameWorldPage() {
           <NotepadModal
             onClose={() => setShowNotepad(false)}
             onSubmit={handleNotepadSubmit}
+            isMobile={isMobile}
           />
         )}
 
-        {showSettings && (
+        {showSettings && !isMobile && (
           <SettingsPanel
             brightness={brightness}
             onBrightnessChange={setBrightness}
             musicEnabled={musicEnabled}
             onMusicToggle={() => setMusicEnabled(prev => !prev)}
             onAudioToggle={(enabled) => {
-              if (enabled && homingAudioRef.current && maloneyAudioRef.current && nycSubwayAudioRef.current) {
-                // Unlock audio if needed
-                homingAudioRef.current.play()
-                  .then(() => {
-                    homingAudioRef.current?.pause();
-                    homingAudioRef.current!.currentTime = 0;
-                  })
-                  .catch(err => console.error('Homing unlock failed:', err));
-
-                maloneyAudioRef.current.play()
-                  .then(() => {
-                    maloneyAudioRef.current?.pause();
-                    maloneyAudioRef.current!.currentTime = 0;
-                  })
-                  .catch(err => console.error('Maloney unlock failed:', err));
-
-                nycSubwayAudioRef.current.play()
-                  .then(() => {
-                    nycSubwayAudioRef.current?.pause();
-                    nycSubwayAudioRef.current!.currentTime = 0;
-                  })
-                  .catch(err => console.error('NYC subway unlock failed:', err));
+              if (enabled) {
+                unlockAudio().finally(() => {
+                  setMusicEnabled(true);
+                });
+              } else {
+                setMusicEnabled(false);
               }
-              setMusicEnabled(enabled);
             }}
             responses={responses}
             onClose={() => setShowSettings(false)}
           />
         )}
 
-        <button
-          onClick={() => setShowSettings(true)}
-          className="absolute bottom-4 right-4 w-10 h-10 bg-white/80 hover:bg-white text-gray-900 rounded-full shadow-lg transition-all flex items-center justify-center font-bold text-xl"
-          style={{ fontFamily: 'Helvetica, sans-serif' }}
-        >
-          i
-        </button>
+        {!isMobile && (
+          <button
+            onClick={() => setShowSettings(true)}
+            className="absolute bottom-4 right-4 w-10 h-10 bg-white/80 hover:bg-white text-gray-900 rounded-full shadow-lg transition-all flex items-center justify-center font-bold text-xl"
+            style={{ fontFamily: 'Helvetica, sans-serif' }}
+          >
+            i
+          </button>
+        )}
 
-        {showControls && (
+        {!isMobile && showControls && (
           <div className="absolute top-4 left-4 bg-black/70 text-white px-4 py-2 rounded-lg font-['Helvetica']">
             <p className="text-sm">Use WASD or Arrow Keys to move</p>
             <p className="text-sm">Click on NPCs to talk</p>
           </div>
         )}
 
-        <div className="absolute bottom-4 left-4 bg-black/80 text-white px-4 py-3 rounded-lg font-['Helvetica'] border-2 border-white/30">
+        <div className={`absolute bottom-4 bg-black/80 text-white px-4 py-3 rounded-lg font-['Helvetica'] border-2 border-white/30 ${
+          isMobile ? 'left-1/2 transform -translate-x-1/2' : 'left-4'
+        }`}>
           {currentWorld === 'world1' && (
-            <p className="text-sm font-semibold">
-              Knoxville, Tennessee: {knoxvilleWeather.weather} • {knoxvilleWeather.hour > 12 ? knoxvilleWeather.hour - 12 : knoxvilleWeather.hour}:{('0' + (new Date().getMinutes())).slice(-2)}{knoxvilleWeather.hour >= 12 ? 'PM' : 'AM'}
-            </p>
+            isMobile ? (
+              <div className="text-center leading-tight">
+                <p className="text-xs font-semibold mb-0.5">Knoxville, Tennessee</p>
+                <p className="text-xs">{knoxvilleWeather.weather} • {knoxvilleWeather.hour > 12 ? knoxvilleWeather.hour - 12 : knoxvilleWeather.hour}:{('0' + (new Date().getMinutes())).slice(-2)}{knoxvilleWeather.hour >= 12 ? 'PM' : 'AM'}</p>
+              </div>
+            ) : (
+              <p className="text-sm font-semibold">
+                Knoxville, Tennessee: {knoxvilleWeather.weather} • {knoxvilleWeather.hour > 12 ? knoxvilleWeather.hour - 12 : knoxvilleWeather.hour}:{('0' + (new Date().getMinutes())).slice(-2)}{knoxvilleWeather.hour >= 12 ? 'PM' : 'AM'}
+              </p>
+            )
           )}
           {currentWorld === 'world2' && (
-            <p className="text-sm font-semibold">
-              New York, New York: {nycWeather.weather} • {nycWeather.hour > 12 ? nycWeather.hour - 12 : nycWeather.hour}:{('0' + (new Date().getMinutes())).slice(-2)}{nycWeather.hour >= 12 ? 'PM' : 'AM'}
-            </p>
+            isMobile ? (
+              <div className="text-center leading-tight">
+                <p className="text-xs font-semibold mb-0.5">New York, New York</p>
+                <p className="text-xs">{nycWeather.weather} • {nycWeather.hour > 12 ? nycWeather.hour - 12 : nycWeather.hour}:{('0' + (new Date().getMinutes())).slice(-2)}{nycWeather.hour >= 12 ? 'PM' : 'AM'}</p>
+              </div>
+            ) : (
+              <p className="text-sm font-semibold">
+                New York, New York: {nycWeather.weather} • {nycWeather.hour > 12 ? nycWeather.hour - 12 : nycWeather.hour}:{('0' + (new Date().getMinutes())).slice(-2)}{nycWeather.hour >= 12 ? 'PM' : 'AM'}
+              </p>
+            )
           )}
         </div>
 
-        {showAudioEnable && (
+        {showAudioEnable && !isMobile && (
           <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/90 rounded-xl shadow-2xl p-8 z-50 border-2 border-white">
             <h3 className="text-white text-2xl font-bold font-['Helvetica'] mb-6 text-center">
               Enable Audio?
@@ -1155,15 +1410,15 @@ export function GameWorldPage() {
             <div className="flex gap-4">
               <button
                 onClick={() => handleEnableAudio(true)}
-                className="px-8 py-4 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold text-lg font-['Helvetica'] transition-all hover:scale-105 transform shadow-xl"
+                className="px-8 py-4 bg-transparent border-2 border-green-600 hover:bg-green-600 text-green-600 hover:text-white rounded-lg font-bold text-lg font-['Helvetica'] transition-all hover:scale-105 transform shadow-xl"
               >
-                🔊 Yes
+                Yes
               </button>
               <button
                 onClick={() => handleEnableAudio(false)}
-                className="px-8 py-4 bg-red-600 hover:bg-red-700 text-white rounded-lg font-bold text-lg font-['Helvetica'] transition-all hover:scale-105 transform shadow-xl"
+                className="px-8 py-4 bg-transparent border-2 border-red-600 hover:bg-red-600 text-red-600 hover:text-white rounded-lg font-bold text-lg font-['Helvetica'] transition-all hover:scale-105 transform shadow-xl"
               >
-                🔇 No
+                No
               </button>
             </div>
           </div>

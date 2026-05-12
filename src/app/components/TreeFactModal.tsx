@@ -4,9 +4,10 @@ import paperImage from 'figma:asset/d80cecff805d2f144fb5d9bb9c46f979c59ee8e3.png
 interface TreeFactModalProps {
   fact: string;
   onClose: () => void;
+  isMobile?: boolean;
 }
 
-export function TreeFactModal({ fact, onClose }: TreeFactModalProps) {
+export function TreeFactModal({ fact, onClose, isMobile = false }: TreeFactModalProps) {
   const [phase, setPhase] = useState<'float' | 'fall' | 'dragging' | 'thrown'>('float');
   const [position, setPosition] = useState({ x: window.innerWidth / 2, y: -100 });
   const [rotation, setRotation] = useState(0);
@@ -191,7 +192,7 @@ export function TreeFactModal({ fact, onClose }: TreeFactModalProps) {
         }}
         onMouseDown={handleMouseDown}
       >
-        <div className="relative w-[700px] h-[400px]">
+        <div className={`relative ${isMobile ? 'w-[350px] h-[200px]' : 'w-[700px] h-[400px]'}`}>
           <img
             src={paperImage}
             alt="Paper"
@@ -201,8 +202,8 @@ export function TreeFactModal({ fact, onClose }: TreeFactModalProps) {
               pointerEvents: 'none'
             }}
           />
-          <div className="absolute inset-0 flex items-center justify-center p-16 pointer-events-none">
-            <p className="text-gray-900 text-xl font-medium text-center leading-relaxed font-['Helvetica']" style={{ textShadow: '0 1px 2px rgba(255,255,255,0.5)' }}>
+          <div className={`absolute inset-0 flex items-center justify-center ${isMobile ? 'p-6' : 'p-16'} pointer-events-none`}>
+            <p className={`text-gray-900 ${isMobile ? 'text-sm' : 'text-xl'} font-medium text-center leading-relaxed font-['Helvetica']`} style={{ textShadow: '0 1px 2px rgba(255,255,255,0.5)' }}>
               {fact}
             </p>
           </div>

@@ -6,29 +6,9 @@ export function IntroPage() {
   const navigate = useNavigate();
   const [phase, setPhase] = useState<'image' | 'welcome'>('image');
 
-  // Check if user has already completed intro/profile
-  useEffect(() => {
-    const hasCompletedIntro = sessionStorage.getItem('hasCompletedIntro');
-    const selectedWorld = sessionStorage.getItem('selectedWorld');
-    const userProfile = sessionStorage.getItem('userProfile');
 
-    // If they've completed the intro and have a profile, redirect to their world
-    if (hasCompletedIntro && selectedWorld && userProfile) {
-      const worldPath = selectedWorld === 'world1' ? '/world/knoxville' : '/world/nyc';
-      navigate(worldPath, { replace: true });
-    }
-  }, [navigate]);
-
-  // Phase 1: Show image for 5 seconds
-  useEffect(() => {
-    if (phase === 'image') {
-      const timer = setTimeout(() => {
-        setPhase('welcome');
-      }, 5000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [phase]);
+  // Phase 1: Show image until user clicks continue
+  // Removed auto-advance timer - user must click continue button
 
   const handleWorldSelect = (world: 'world1' | 'world2') => {
     sessionStorage.setItem('selectedWorld', world);
@@ -40,13 +20,27 @@ export function IntroPage() {
       {/* Phase 1: Intro Image (5 seconds) */}
       {phase === 'image' && (
         <div
-          className="fixed inset-0 z-[100] transition-opacity duration-1000"
+          className="fixed inset-0 z-[100] transition-opacity duration-1000 flex flex-col items-center justify-between"
           style={{
             backgroundImage: `url(${introImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
-        />
+        >
+          <div className="flex-1 flex items-center justify-center">
+            <p className="text-white text-xl font-['Helvetica'] mt-[60vh]">
+              by Noelani Fishman
+            </p>
+          </div>
+          <div className="pb-12">
+            <button
+              onClick={() => setPhase('welcome')}
+              className="px-8 py-3 bg-black border-2 border-white hover:bg-white hover:text-black text-white text-lg font-bold font-['Helvetica'] rounded-lg transition-all hover:scale-110 transform shadow-2xl"
+            >
+              continue
+            </button>
+          </div>
+        </div>
       )}
 
       {/* Phase 2: Welcome Screen */}

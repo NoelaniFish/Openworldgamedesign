@@ -1,3 +1,4 @@
+import { Shadow } from './Shadow';
 import raccoonImage from 'figma:asset/4ec2f284fb07317c7ac65f6d5da7ef4da4211a42.png';
 import chickenImage from 'figma:asset/2d71bd5bbe6de62ca2e0f3e5b96da12cb54d9765.png';
 import flockImage from 'figma:asset/2dbac79976483e1e0bbce34cb1d458b2e36d0a33.png';
@@ -58,17 +59,26 @@ export function Blockade({ blockade, onClick }: BlockadeProps) {
   }
   
   return (
-    <img
-      src={image}
-      alt={blockade.type}
-      className={`absolute transition-transform ${isClickable ? 'cursor-pointer hover:scale-110' : 'pointer-events-none'}`}
-      style={{
-        width: `${size * 4}px`,
-        height: `${size * 4}px`,
-        left: `${blockade.x - size * 2}px`,
-        top: `${blockade.y - size * 2}px`,
-      }}
-      onClick={isClickable ? onClick : undefined}
-    />
+    <>
+      <Shadow
+        x={blockade.x}
+        y={blockade.y}
+        width={size * 3}
+        height={size * 1.5}
+        offsetY={size}
+      />
+      <img
+        src={image}
+        alt={blockade.type}
+        className={`absolute transition-transform ${isClickable ? 'cursor-pointer hover:scale-110' : 'pointer-events-none'}`}
+        style={{
+          width: `${size * 4}px`,
+          height: `${size * 4}px`,
+          left: `${blockade.x - size * 2}px`,
+          top: `${blockade.y - size * 2}px`,
+        }}
+        onClick={isClickable ? onClick : undefined}
+      />
+    </>
   );
 }

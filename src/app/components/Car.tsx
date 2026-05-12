@@ -1,3 +1,4 @@
+import { Shadow } from './Shadow';
 import car1Image from 'figma:asset/6f6d88627d83702050ff44ff53e8fa5274c7c032.png';
 import car2Image from 'figma:asset/68ef78cc7d1bff0281613edf407f13a563bd655d.png';
 import car3Image from 'figma:asset/1a0089b9aeff528a766b3f1a73f3f5cbd1e95c91.png';
@@ -31,28 +32,38 @@ export function Car({ car, onClick }: CarProps) {
   const facingLeft = car.vx > 0; // If moving right, face left (smoke behind)
   
   return (
-    <div
-      className="absolute cursor-pointer hover:opacity-90 transition-opacity z-20"
-      style={{
-        left: `${car.x - size * 2}px`,
-        top: `${car.y - size * 2}px`,
-        width: `${size * 4}px`,
-        height: `${size * 4}px`,
-        pointerEvents: 'auto',
-      }}
-      onClick={onClick}
-    >
-      <img
-        src={image}
-        alt="car"
-        className="absolute"
-        style={{
-          width: '100%',
-          height: '100%',
-          transform: `scaleX(${facingLeft ? -1 : 1})`,
-          transformOrigin: 'center center'
-        }}
+    <>
+      <Shadow
+        x={car.x}
+        y={car.y}
+        width={size * 3}
+        height={size * 1.5}
+        offsetY={size}
+        zIndex={19}
       />
-    </div>
+      <div
+        className="absolute cursor-pointer hover:opacity-90 transition-opacity z-20"
+        style={{
+          left: `${car.x - size * 2}px`,
+          top: `${car.y - size * 2}px`,
+          width: `${size * 4}px`,
+          height: `${size * 4}px`,
+          pointerEvents: 'auto',
+        }}
+        onClick={onClick}
+      >
+        <img
+          src={image}
+          alt="car"
+          className="absolute"
+          style={{
+            width: '100%',
+            height: '100%',
+            transform: `scaleX(${facingLeft ? -1 : 1})`,
+            transformOrigin: 'center center'
+          }}
+        />
+      </div>
+    </>
   );
 }

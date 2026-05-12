@@ -15,7 +15,8 @@ import nycNpc4 from '../imports/Untitled_Artwork_48.gif';
 import amberImg from '../imports/Untitled_Artwork_18.gif';
 import portiaImg from '../imports/Untitled_Artwork_17.gif';
 import joceImg from '../imports/IMG_1860.gif';
-import dImg from '../imports/Untitled_Artwork_41.gif';
+import dImg from '../imports/Untitled_Artwork_41-1.gif';
+import fImg from '../imports/Untitled_Artwork_42-portrait.gif';
 import samImg from '../imports/Untitled_Artwork_40-1.gif';
 import romeroImg from '../imports/Untitled_Artwork_19.gif';
 
@@ -24,6 +25,7 @@ import { amberDialogue } from './amberDialogue';
 import { portiaDialogue } from './portiaDialogue';
 import { joceDialogue } from './joceDialogue';
 import { dDialogue } from './dDialogue';
+import { fDialogue } from './fDialogue';
 import { samDialogue } from './samDialogue';
 import { romeroDialogue } from './romeroDialogue';
 
@@ -35,6 +37,7 @@ console.log('NPC GIF imports:', {
   portiaImg,
   joceImg,
   dImg,
+  fImg,
   samImg,
   romeroImg
 });
@@ -79,6 +82,11 @@ export const knoxvilleCharacters = [
     name: 'D.',
     portraitImage: dImg,
     dialogue: dDialogue
+  },
+  {
+    name: 'F.',
+    portraitImage: fImg,
+    dialogue: fDialogue
   }
 ];
 

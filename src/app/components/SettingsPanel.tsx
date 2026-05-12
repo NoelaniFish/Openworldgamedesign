@@ -99,7 +99,7 @@ export function SettingsPanel({
                         : 'bg-gray-300 hover:bg-gray-400 text-gray-700'
                     }`}
                   >
-                    🔊 Enable
+                    Enable
                   </button>
                   <button
                     onClick={() => onAudioToggle(false)}
@@ -109,7 +109,7 @@ export function SettingsPanel({
                         : 'bg-gray-300 hover:bg-gray-400 text-gray-700'
                     }`}
                   >
-                    🔇 Disable
+                    Disable
                   </button>
                 </div>
               </div>

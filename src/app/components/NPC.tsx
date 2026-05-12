@@ -1,3 +1,5 @@
+import { Shadow } from './Shadow';
+
 interface NPCProps {
   npc: {
     id: string;
@@ -27,37 +29,47 @@ export function NPC({ npc, onClick, isActive, isRevealed = false, world }: NPCPr
   const fontSize = isNYC ? '35px' : '45px';
   
   return (
-    <div
-      className="absolute cursor-pointer transition-all hover:scale-110 z-30"
-      style={{
-        left: `${npc.x - offset}px`,
-        top: `${npc.y - offset}px`,
-        width: `${containerSize}px`,
-        height: `${containerSize}px`,
-        pointerEvents: 'auto',
-      }}
-      onClick={onClick}
-    >
-      <div className="flex items-center justify-center w-full h-full">
-        {showImage ? (
-          <img 
-            src={npc.image} 
-            alt={npc.name}
-            className={`${imageClass} object-contain pointer-events-none ${isActive ? 'ring-4 ring-yellow-400 rounded-full' : ''}`}
-          />
-        ) : (
-          <div 
-            className={`rounded-full border-4 border-white shadow-lg flex items-center justify-center pointer-events-none ${isActive ? 'ring-4 ring-yellow-400' : ''}`}
-            style={{ backgroundColor: npc.color, width: `${circleSize}px`, height: `${circleSize}px` }}
-          >
-            {npc.letter && (
-              <span className="text-white text-xl uppercase select-none" style={{ fontSize }}>
-                {npc.letter}
-              </span>
-            )}
-          </div>
-        )}
+    <>
+      <Shadow
+        x={npc.x}
+        y={npc.y}
+        width={offset * 1.2}
+        height={offset * 0.6}
+        offsetY={offset * 0.5}
+        zIndex={29}
+      />
+      <div
+        className="absolute cursor-pointer transition-all hover:scale-110 z-30"
+        style={{
+          left: `${npc.x - offset}px`,
+          top: `${npc.y - offset}px`,
+          width: `${containerSize}px`,
+          height: `${containerSize}px`,
+          pointerEvents: 'auto',
+        }}
+        onClick={onClick}
+      >
+        <div className="flex items-center justify-center w-full h-full">
+          {showImage ? (
+            <img
+              src={npc.image}
+              alt={npc.name}
+              className={`${imageClass} object-contain pointer-events-none ${isActive ? 'ring-4 ring-yellow-400 rounded-full' : ''}`}
+            />
+          ) : (
+            <div
+              className={`rounded-full border-4 border-white shadow-lg flex items-center justify-center pointer-events-none ${isActive ? 'ring-4 ring-yellow-400' : ''}`}
+              style={{ backgroundColor: npc.color, width: `${circleSize}px`, height: `${circleSize}px` }}
+            >
+              {npc.letter && (
+                <span className="text-white text-xl uppercase select-none" style={{ fontSize }}>
+                  {npc.letter}
+                </span>
+              )}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

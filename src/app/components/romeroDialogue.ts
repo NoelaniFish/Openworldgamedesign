@@ -1,455 +1,132 @@
-// R.'s dialogue tree
+import { getRandomExitLine, getRandomRestartLine, createExitNode, createRestartMarker } from './dialogueHelpers';
+
+const exitNode = createExitNode();
+const restartMarker = createRestartMarker();
+
+// Terminal nodes from all branches (level 9 - must be defined first)
+const r1_9a = { text: "Like they were always connected? Different words for the same reality—they describe one person, not competing identities.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_9b = { text: "Was it that sudden? Yeah—like a light switched on and I couldn't pretend I didn't see it anymore.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_9c = { text: "As a butch lesbian? My masculinity expresses my lesbianism—being transmasc is how I live out being a butch dyke.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_9d = { text: "What does that mean? Masculine as a woman. Nothing contradictory about it—I'm just me, fully integrated.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_9e = { text: "Does that feel whole? Like finally arriving somewhere I'd been trying to get to my whole life.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_9f = { text: "Did that affect my identity? No more splitting myself into pieces—I exist as one person now.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_9g = { text: "Do I find others like me? When you don't have to explain yourself, you can actually relax—that's rare for us.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_9h = { text: "Does community matter? Meeting other transmasc lesbians proved I wasn't making this up—we're real.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_9i = { text: "What did I do? Top surgery and testosterone—necessary steps in becoming who I actually am.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_9j = { text: "How do I present now? He/him works for me—masculine pronouns for a masculine lesbian woman.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_9k = { text: "How does that work? Both reject simple categories—being transmasc and being lesbian both mean refusing the binary.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_9l = { text: "Do they connect? They flow together—each one deepens my understanding of the others.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_9m = { text: "Trans and lesbian? I didn't discover them separately—understanding one meant understanding the other.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_9n = { text: "Did one come first? No—they arrived simultaneously, inseparable from the start.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_9o = { text: "A masculine woman? Womanhood, but the masculine kind—transition let me live that fully.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_9p = { text: "That makes sense? Makes perfect sense once you stop forcing people into boxes.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+
+const r2_9a = { text: "Do I recognize myself now? Looking in mirrors doesn't feel eerie anymore—I actually see myself looking back.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_9b = { text: "How does that feel? Photos don't make me flinch anymore—I can actually stand to look at them.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_9c = { text: "So I didn't change? I was always masculine—transition just made it possible for others to see what was already true.", speaker: "R.", choices: [{ text: "As a butch lesbian?", next: r1_9c }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_9d = { text: "Internal and external matching? My body caught up to who I'd been all along—that unity is everything.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_9e = { text: "What did I do? T deepened my voice, redistributed fat, grew facial hair. Top surgery gave me the flat chest I needed.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_9f = { text: "Did it help right away? Every testosterone change felt like coming home—my body responded eagerly, like it had been waiting.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_9g = { text: "Did that give you courage? Seeing others who'd transitioned and survived—thrived, even—gave me a roadmap.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_9h = { text: "Representation matters? Proved transition wouldn't destroy me—I could have a real life afterward, with people who understood.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_9i = { text: "Body felt right? My body stopped feeling like a costume I was trapped in.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_9j = { text: "Mind and body matched? The split between inner and outer reality closed—I became one person instead of two.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_9k = { text: "What specifically? Testosterone and top surgery—couldn't have done one without the other, both essential.", speaker: "R.", choices: [{ text: "Did that help you feel whole?", next: r1_9e }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_9l = { text: "How was it? Every change felt natural—no regrets, no second-guessing.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_9m = { text: "How? Through medical transition—it erased the gap between how I felt and how I looked.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_9n = { text: "Through transition? By changing my body to match my mind—simple as that.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_9o = { text: "Does it feel complete? Complete—like all the pieces finally fit together.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_9p = { text: "Was it relief? Relief is the word. Not excitement, not fear—just pure relief.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+
+// Level 8 nodes - can reference level 9
+const r2_8a = { text: "What changed? Transition solved that disconnect—no more gap between what I see and who I am.", speaker: "R.", choices: [{ text: "You recognize yourself now?", next: r2_9a }, { text: "How does that feel?", next: r2_9b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_8b = { text: "Did my masculinity change? Even as a kid I chose masculine everything—clothes, toys, roles. Transition just let my body reflect what was always true.", speaker: "R.", choices: [{ text: "So you didn't change?", next: r2_9c }, { text: "Internal and external matching?", next: r2_9d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_8c = { text: "How did transitioning feel? Overwhelming relief—like a weight I'd been carrying my whole life suddenly lifted.", speaker: "R.", choices: [{ text: "What did you do?", next: r2_9e }, { text: "Did it help right away?", next: r2_9f }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_8d = { text: "Did seeing others help? Seeing other transmasc people living gave me hope. Before that, transitioning felt like this abstract thing that might not actually work.", speaker: "R.", choices: [{ text: "Did that give you courage?", next: r2_9g }, { text: "Representation matters?", next: r2_9h }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_8e = { text: "How did it feel? Pure relief, honestly. Finally aligning my body with my sense of self.", speaker: "R.", choices: [{ text: "Body felt right?", next: r2_9i }, { text: "Mind and body matched?", next: r2_9j }, { text: "Did that affect your identity?", next: r1_9f }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_8f = { text: "What did I do? I did T and top surgery. They weren't cosmetic choices—they were medical necessities.", speaker: "R.", choices: [{ text: "What specifically?", next: r2_9k }, { text: "How was it?", next: r2_9l }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_8g = { text: "What changed? I became more myself through medical transition. It gave me the tools to express my masculinity authentically.", speaker: "R.", choices: [{ text: "How?", next: r2_9m }, { text: "Through transition?", next: r2_9n }, { text: "As a butch lesbian?", next: r1_9c }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_8h = { text: "How do I feel now? Transitioning gave me peace. The relief was immediate and profound.", speaker: "R.", choices: [{ text: "Does it feel complete?", next: r1_9e }, { text: "Was it relief?", next: r2_9p }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+
+const r1_8a = { text: "You said they happened at once? The realization came all at once—like flipping a switch. Being transmasc IS how I'm a lesbian.", speaker: "R.", choices: [{ text: "Like they were always connected?", next: r1_9a }, { text: "It was that sudden?", next: r1_9b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_8b = { text: "How do they work together? My masculinity carries my lesbianism—you can't separate them in me.", speaker: "R.", choices: [{ text: "That's a powerful distinction.", next: r1_9c }, { text: "Masculine as a woman.", next: r1_9d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_8c = { text: "How do I hold all three? I hold all three at once—none of them are optional or secondary.", speaker: "R.", choices: [{ text: "Does that feel whole?", next: r1_9e }, { text: "No more compartmentalizing?", next: r1_9f }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_8d = { text: "What does that look like? Drop one word and you lose part of who I am—they all matter.", speaker: "R.", choices: [{ text: "Do you find others like you?", next: r1_9g }, { text: "Does community matter?", next: r1_9h }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_8e = { text: "Did I medically transition? Transition bridged the disconnect—made me whole instead of fragmented.", speaker: "R.", choices: [{ text: "What did you do?", next: r1_9i }, { text: "How do you present now?", next: r1_9j }, { text: "How did it feel?", next: r2_8e }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_8f = { text: "How do those fit? Two paths to the same place—my transmasc identity is inseparable from my lesbianism.", speaker: "R.", choices: [{ text: "How does that work?", next: r1_9k }, { text: "Do they connect?", next: r1_9l }, { text: "Did transition clarify that?", next: r2_9d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_8g = { text: "When did I realize? One flash of understanding—suddenly I saw my whole self clearly.", speaker: "R.", choices: [{ text: "Trans and lesbian?", next: r1_9m }, { text: "Did one come first?", next: r1_9n }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_8h = { text: "How do I explain it? I'm still a woman. I'm still a lesbian. Those facts remain constant.", speaker: "R.", choices: [{ text: "A masculine woman?", next: r1_9o }, { text: "That makes sense?", next: r1_9p }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+
+// Continue with remaining levels...
+const r2_7a = { text: "What changed? Pre-transition, mirrors were disturbing—I couldn't connect to the person I saw. Transition made that person actually be me.", speaker: "R.", choices: [{ text: "That's such specific relief.", next: r2_8a }, { text: "Did your masculinity change?", next: r2_8b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_7b = { text: "What was the experience? I stopped feeling eerie looking at myself. That feeling of wrongness just disappeared.", speaker: "R.", choices: [{ text: "How did transitioning feel?", next: r2_8c }, { text: "Did seeing others help?", next: r2_8d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_7c = { text: "What about transitioning? Transitioning was necessary for me. I needed my physical form to match my internal sense of self.", speaker: "R.", choices: [{ text: "How did it feel?", next: r2_8e }, { text: "What did you do?", next: r2_8f }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_7d = { text: "How so? Medical transition was important to me. It brought coherence to my existence.", speaker: "R.", choices: [{ text: "What changed?", next: r2_8g }, { text: "How do you feel now?", next: r2_8h }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+
+const r1_7a = { text: "What are my identities? I'm a transmasc butch lesbian—every word pulls its weight, and I saw them all at once.", speaker: "R.", choices: [{ text: "You said they happened at once?", next: r1_8a }, { text: "How do they work together?", next: r1_8b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_7b = { text: "How do I describe myself? One big epiphany—suddenly everything clicked and I understood myself completely.", speaker: "R.", choices: [{ text: "How do you hold all three?", next: r1_8c }, { text: "What does that look like?", next: r1_8d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_7c = { text: "What about that? Both of those things are true, permanent, and me.", speaker: "R.", choices: [{ text: "Did you medically transition?", next: r1_8e }, { text: "How do those fit?", next: r1_8f }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_7d = { text: "How does that work? No contradiction there—they fit together perfectly once you understand them.", speaker: "R.", choices: [{ text: "When did you realize?", next: r1_8g }, { text: "How do you explain it?", next: r1_8h }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+
+const r2_6a = { text: "What was that like? What was transitioning like for me? Transitioning changed everything. It was the crucial step in aligning my body with my identity.", speaker: "R.", choices: [{ text: "What changed?", next: r2_7a }, { text: "What was the experience?", next: r2_7b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_6b = { text: "What more? Transition shaped who I am. It allowed my body to catch up to what had always been true about me.", speaker: "R.", choices: [{ text: "Tell me about it.", next: r2_7c }, { text: "How so?", next: r2_7d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+
+const r1_6a = { text: "What about you? It's a language we speak without words.", speaker: "R.", choices: [{ text: "What are your identities?", next: r1_7a }, { text: "How do you describe yourself?", next: r1_7b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_6b = { text: "What's my deal? Each one adds specificity. Together they paint a complete picture of who I am.", speaker: "R.", choices: [{ text: "Tell me about that.", next: r1_7c }, { text: "How does that work?", next: r1_7d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+
+const r2_5a = { text: "What was transitioning like for me? Transitioning changed everything for me. It was a crucial step in aligning my body with my identity.", speaker: "R.", choices: [{ text: "What was that like?", next: r2_6a }, { text: "Tell me more.", next: r2_6b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_4a = { text: "What about transition? I transitioned medically with testosterone and top surgery. Both were necessary for me.", speaker: "R.", choices: [{ text: "Tell me about that.", next: r2_5a }, { text: "What was it like?", next: r2_5a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_3a = { text: "What does that mean for me? Transition was important to me. I needed my physical form to match my internal sense of self.", speaker: "R.", choices: [{ text: "How so?", next: r2_4a }, { text: "Tell me.", next: r2_4a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r2_2a = { text: "What was transitioning like for me? I'm transmasc. That means I medically transitioned to align my body with my masculine identity.", speaker: "R.", choices: [{ text: "What does that mean for you?", next: r2_3a }, { text: "Tell me about that.", next: r2_3a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+
+const r1_5a = { text: "That's intentional? I saw you walk in and I knew. Enough to know we probably speak the same language.", speaker: "R.", choices: [{ text: "Tell me about yourself.", next: r1_6a }, { text: "What's your deal?", next: r1_6b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_4a = { text: "My vibe? It's this whole unspoken communication system we've built.", speaker: "R.", choices: [{ text: "That's intentional?", next: r1_5a }, { text: "You noticed that?", next: r1_5a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_3a = { text: "What energy? You walked in and I could tell immediately that we're navigating similar territory. Similar identities, similar aesthetics, similar experiences.", speaker: "R.", choices: [{ text: "My vibe?", next: r1_4a }, { text: "What do you mean?", next: r1_4a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r1_2a = { text: "What about me? You've got that same energy I recognize in myself and in other butches. It's unmistakable once you know what to look for.", speaker: "R.", choices: [{ text: "What energy?", next: r1_3a }, { text: "Tell me.", next: r1_3a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+
+// Branch 3 continues...
+const r3_9a = { text: "You can blend in? Being unremarkable feels amazing—I'm not a spectacle here, just another person.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_9b = { text: "Less staring? I can actually relax in public—you don't appreciate that until you've never had it.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_8a = { text: "Visibility without hypervisibility? Here I'm just another Brooklyn queer doing my thing—nobody treats me like I need explaining.", speaker: "R.", choices: [{ text: "You can blend in?", next: r3_9a }, { text: "Less staring?", next: r3_9b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_9c = { text: "You found your people? Community keeps me sane—without other transmasc folks around, I'd lose my mind.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_9d = { text: "How important is that? Critical—when everything else feels hostile, my people keep me going.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_8b = { text: "Do I feel community? People who get it—other transmasc lesbians, butches. Finding community here has been essential.", speaker: "R.", choices: [{ text: "You found your people?", next: r3_9c }, { text: "How important is that?", next: r3_9d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_7a = { text: "How does location matter? In New York I can just exist without constantly justifying my existence. In Brooklyn, I'm just part of the landscape.", speaker: "R.", choices: [{ text: "Visibility without hypervisibility?", next: r3_8a }, { text: "Do you feel community?", next: r3_8b }, { text: "Tell me about your identities.", next: r1_7a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_9e = { text: "Where do people gather? Bars, community centers, queer events. We have our own spaces, our own networks.", speaker: "R.", choices: [{ text: "Did transition help you find them?", next: r2_8d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_9f = { text: "Is it active? There's always something happening. I can go to a party and know there will be other transmasc people there.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_8c = { text: "What's the community like? Strong—lots of transmasc folks, lots of butches. There are enough of us in New York that we have our own spaces.", speaker: "R.", choices: [{ text: "Where do people gather?", next: r3_9e }, { text: "Is it active?", next: r3_9f }, { text: "Did transition help you find them?", next: r2_8d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_9g = { text: "New York shaped me? New York proved I wasn't a freak—there are enough of us here that I'm normal.", speaker: "R.", choices: [{ text: "What's your identity?", next: r1_7a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_9h = { text: "Community matters? Living among queers emboldened me—I saw people thriving and knew I could too.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_8d = { text: "Did it change me? Absolutely—watching other transmasc people actually live their lives made transition feel achievable.", speaker: "R.", choices: [{ text: "New York shaped you?", next: r3_9g }, { text: "Community matters?", next: r3_9h }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_7b = { text: "What about New York? In New York I can exist without explaining myself. I'm not constantly being asked to represent all trans people.", speaker: "R.", choices: [{ text: "What's the community like?", next: r3_8c }, { text: "Did it change you?", next: r3_8d }, { text: "How do you identify?", next: r1_7b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_6a = { text: "Does location matter? Being in New York absolutely affects how I navigate my identity. This city gave me the space to become myself.", speaker: "R.", choices: [{ text: "How does location matter?", next: r3_7a }, { text: "Tell me about New York.", next: r3_7b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_9i = { text: "More closeted? Much more guarded, always explaining what transmasc means. I'd have to defend my right to use the bathroom or access healthcare.", speaker: "R.", choices: [{ text: "What does transmasc mean to you?", next: r1_7b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_9j = { text: "Location matters that much? Location shapes everything. The difference between living here and living somewhere less queer-dense is massive.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_8e = { text: "Would I be different elsewhere? I'd probably be less visible, more careful. In a city with less queer density, I'd be an anomaly.", speaker: "R.", choices: [{ text: "More closeted?", next: r3_9i }, { text: "Location matters that much?", next: r3_9j }, { text: "Tell me about your transition.", next: r2_7c }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_9k = { text: "You feel safer here? I can exist without calculating risk every time I leave my apartment. That's huge.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_9l = { text: "Less pressure? Just existing feels easier here. I don't stand out as unusual or threatening—I'm just another queer person going about my day.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_8f = { text: "What does Brooklyn give me? Safety, community, freedom. Brooklyn gives me all three.", speaker: "R.", choices: [{ text: "You feel safer here?", next: r3_9k }, { text: "Less pressure?", next: r3_9l }, { text: "What about your identity here?", next: r1_8c }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_7c = { text: "What more about Brooklyn? Brooklyn lets me be visible safely. That's not something I'd have everywhere.", speaker: "R.", choices: [{ text: "Would you be different elsewhere?", next: r3_8e }, { text: "What does Brooklyn give you?", next: r3_8f }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_9m = { text: "Where do people gather? Cafes, bars, community spaces. I can go to a bar and see other butches.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_9n = { text: "Lots happening? There's infrastructure for us. Spaces where I don't have to explain myself to exist.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_8g = { text: "How big is it? Huge—lots of transmasc folks, butches, queers. In Brooklyn, there are so many of us that I'm just part of the landscape.", speaker: "R.", choices: [{ text: "Where do people gather?", next: r3_9m }, { text: "Lots happening?", next: r3_9n }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_9o = { text: "Does that help? Definitely validates who I am. Seeing transmasc people thriving showed me this was real, not just a fantasy.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_9p = { text: "Representation matters? Seeing others gives courage. It showed me I could have a future, a community, a sense of belonging.", speaker: "R.", choices: [{ text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_8h = { text: "How important is that? Essential—I need to see people like me living full lives. Representation matters not just in terms of visibility, but in terms of showing what's possible.", speaker: "R.", choices: [{ text: "Does that help?", next: r3_9o }, { text: "Representation matters?", next: r3_9p }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_7d = { text: "What's the community like? The queer community here is strong. That community is necessary for survival.", speaker: "R.", choices: [{ text: "How big is it?", next: r3_8g }, { text: "How important is that?", next: r3_8h }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_6b = { text: "Why New York? Brooklyn is incredibly important to me. This city gave me permission to be myself.", speaker: "R.", choices: [{ text: "Tell me more.", next: r3_7c }, { text: "What's the community like?", next: r3_7d }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_5a = { text: "Does that shape me? New York matters to my identity in profound ways. I might not have become myself anywhere else.", speaker: "R.", choices: [{ text: "Does location matter?", next: r3_6a }, { text: "Why New York?", next: r3_6b }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_4a = { text: "How so? I live in New York, specifically Brooklyn. The queer density here changed my life.", speaker: "R.", choices: [{ text: "Does that shape you?", next: r3_5a }, { text: "Tell me about that.", next: r3_5a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_3a = { text: "Does that matter? Location matters more than people think. Being in a city with queer community makes all the difference.", speaker: "R.", choices: [{ text: "How so?", next: r3_4a }, { text: "Why?", next: r3_4a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+const r3_2a = { text: "Does being in New York affect how I navigate my identity? I'm in NYC—Brooklyn specifically. This place shaped who I am.", speaker: "R.", choices: [{ text: "Does that matter?", next: r3_3a }, { text: "Tell me.", next: r3_3a }, { text: getRandomExitLine(), next: exitNode }, { text: getRandomRestartLine(), next: restartMarker }] };
+
 export const romeroDialogue = {
-  text: "Okay first of all, your vibe walked in before you did. Leather jacket, carabiner engineering project, the whole thing.",
-  speaker: "N.",
+  text: "Hey! I'm a leather making trans butch. I work with my hands, make things, fix things. By the way, the name's R.",
+  speaker: "R.",
   choices: [
-    {
-      text: "That's the goal honestly.",
-      next: {
-        text: "That's the goal honestly.",
-        speaker: "R.",
-        choices: [
-          {
-            text: "You said realizing you were trans and realizing you were a lesbian happened almost at the same time?",
-            next: {
-              text: "Yeah. Once I admitted I was a lesbian I was like, 'Well… what the fuck am I doing with the rest of this then?'",
-              speaker: "R.",
-              choices: [
-                {
-                  text: "Was it immediate clarity or more like slowly connecting dots?",
-                  next: {
-                    text: "It all clicked weirdly fast. Suddenly everything made sense — my voice stuff, wanting to be masculine, hating photos of myself.",
-                    speaker: "R.",
-                    choices: [
-                      {
-                        text: "The voice thing?",
-                        next: {
-                          text: "Yeah because I liked when my voice got deeper. Extremely cisgender behavior obviously.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "Nothing says 'straight woman' like yearning to sound like a sad indie bassist.",
-                              next: null
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        text: "The photo thing?",
-                        next: {
-                          text: "I stopped feeling eerie looking at myself. I actually recognize myself now.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "That's such a specific kind of relief.",
-                              next: null
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        text: "The masculinity thing?",
-                        next: {
-                          text: "Yeah. Long hair past my waist, very 'straight girly,' but it never felt right.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "Like performing a role you accidentally got cast in.",
-                              next: null
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          {
-            text: "Your relationship to leather feels almost spiritual.",
-            next: {
-              text: "Unfortunately New York humidity prevents me from reaching my final form year round.",
-              speaker: "R.",
-              choices: [
-                {
-                  text: "What pieces feel most tied to you?",
-                  next: {
-                    text: "Leather jacket. Boots. Carabiner. The essentials.",
-                    speaker: "R.",
-                    choices: [
-                      {
-                        text: "THE CARABINER",
-                        next: {
-                          text: "Because belt loops never sit where I want them to. This was a design problem.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "Honestly this feels like butch industrial design.",
-                              next: {
-                                text: "Exactly. Functionality but make it gay.",
-                                speaker: "R.",
-                                choices: [
-                                  {
-                                    text: "A lesbian sees a hardware issue and becomes an inventor.",
-                                    next: null
-                                  }
-                                ]
-                              }
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        text: "THE LEATHER JACKET",
-                        next: {
-                          text: "It makes me feel the most like myself. Like visibly myself.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "Like armor but also self-portrait.",
-                              next: null
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        text: "FLAGGING + SIGNALS",
-                        next: {
-                          text: "Absolutely. Tiny visual cues let you recognize someone instantly.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "Gay semaphore system.",
-                              next: null
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          {
-            text: "You've talked about New York almost like it unlocked something.",
-            next: {
-              text: "Completely. My introduction to queer life happened here.",
-              speaker: "R.",
-              choices: [
-                {
-                  text: "How different did Michigan feel when you went back?",
-                  next: {
-                    text: "Deeply different. Like people looked at me like I was a cryptid.",
-                    speaker: "R.",
-                    choices: [
-                      {
-                        text: "Tell me about the Costco woman.",
-                        next: {
-                          text: "She literally stopped in fear and stared at us mouth open.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "You in full leather at Costco is objectively funny.",
-                              next: {
-                                text: "I was just buying groceries while looking like a cyberpunk villain.",
-                                speaker: "R.",
-                                choices: [
-                                  {
-                                    text: "The rotisserie chickens feared you.",
-                                    next: null
-                                  }
-                                ]
-                              }
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        text: "The bathroom sign story sounded genuinely tense.",
-                        next: {
-                          text: "Yeah. It reminded me how quickly safety can change depending on location.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "Geography decides how visible your body becomes.",
-                              next: null
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        text: "Do you soften yourself in certain places?",
-                        next: {
-                          text: "Honestly no. I think I developed a 'fuck your opinions' attitude pretty early.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "Survival through stubbornness.",
-                              next: null
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          {
-            text: "You mentioned people gender you really differently depending on the space.",
-            next: {
-              text: "At this point I genuinely don't know what people think I am anymore.",
-              speaker: "R.",
-              choices: [
-                {
-                  text: "Does that ambiguity bother you?",
-                  next: {
-                    text: "Not really. I use any pronouns because very few people actually gender me in the exact way I mean.",
-                    speaker: "R.",
-                    choices: [
-                      {
-                        text: "You don't separate your transness from your lesbian identity?",
-                        next: {
-                          text: "No. They've always been deeply connected for me.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "Not categories. More like overlapping weather systems.",
-                              next: null
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        text: "What kind of masculinity feels right to you?",
-                        next: {
-                          text: "A loving masculinity. A nurturing masculinity.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "Soft heart, leather jacket.",
-                              next: null
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        text: "Do you think people project narratives onto you?",
-                        next: {
-                          text: "Constantly. But honestly I can't control that.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "People love solving gender like it's a riddle game.",
-                              next: null
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          {
-            text: "A lot of your early queer community in New York was trans femme lesbians.",
-            next: {
-              text: "Yeah and I think that shaped me massively.",
-              speaker: "R.",
-              choices: [
-                {
-                  text: "What felt important about those relationships?",
-                  next: {
-                    text: "There was this mutual understanding of building yourself from opposite directions.",
-                    speaker: "R.",
-                    choices: [
-                      {
-                        text: "You seem protective of queer community spaces.",
-                        next: {
-                          text: "Especially now. Transphobia has made community feel even more necessary.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "Survival through proximity.",
-                              next: null
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        text: "Do you feel instantly connected to other butches?",
-                        next: {
-                          text: "Usually yes. There's often an immediate recognition.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "Like two stray cats seeing each other across an alley.",
-                              next: null
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        text: "Do trans femme/trans masc relationships feel distinct to you?",
-                        next: {
-                          text: "Definitely. There's a kind of mutual affirmation built into it.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "Like building mirrors for each other.",
-                              next: null
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          {
-            text: "You describe butchness really differently than stereotypical masculinity.",
-            next: {
-              text: "Yeah. Mine is about care.",
-              speaker: "R.",
-              choices: [
-                {
-                  text: "What does care look like for you?",
-                  next: {
-                    text: "Protecting people. Taking care of people. Being emotionally present.",
-                    speaker: "R.",
-                    choices: [
-                      {
-                        text: "Can butchness still be hard or intimidating?",
-                        next: {
-                          text: "Absolutely. You can be nurturing and still scary-looking.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "The ideal state honestly.",
-                              next: null
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        text: "Do you think butches get assigned protective roles?",
-                        next: {
-                          text: "Yeah, but I also willingly embrace that role.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "Designated emotional support leather jacket.",
-                              next: null
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        text: "You seem unusually confident in claiming labels.",
-                        next: {
-                          text: "I use labels very spitefully.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "Weaponized self-definition.",
-                              next: null
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          {
-            text: "Outside of butchness, who are you?",
-            next: {
-              text: "An artist. A cook. A person with too many hobbies and no apartment space.",
-              speaker: "R.",
-              choices: [
-                {
-                  text: "You called yourself 'spitefully optimistic.'",
-                  next: {
-                    text: "Yeah. I refuse to believe queer life has to be miserable.",
-                    speaker: "R.",
-                    choices: [
-                      {
-                        text: "What kind of art are you making lately?",
-                        next: {
-                          text: "Printmaking and leatherworking mostly.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "Your apartment sounds like a medieval craft guild.",
-                              next: null
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        text: "You mentioned an insane spice cabinet.",
-                        next: {
-                          text: "It's overtaking the apartment. It's becoming structural.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "At some point the paprika starts paying rent.",
-                              next: null
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        text: "What does spiteful optimism mean to you?",
-                        next: {
-                          text: "Believing I deserve joy even when the world insists otherwise.",
-                          speaker: "R.",
-                          choices: [
-                            {
-                              text: "That feels very butch honestly.",
-                              next: {
-                                text: "Yeah maybe it is.",
-                                speaker: "R.",
-                                choices: [
-                                  {
-                                    text: "Building happiness out of pure stubbornness.",
-                                    next: null
-                                  }
-                                ]
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          {
-            text: "Okay final question. If someone met you for five minutes, what would you hope they understood about you?",
-            next: {
-              text: "That I'm softer than I look.",
-              speaker: "R.",
-              choices: [
-                {
-                  text: "Which somehow makes the leather jacket cooler.",
-                  next: null
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
+    { text: "That's the goal honestly. Tell me about yourself.", next: r1_2a },
+    { text: "What was transitioning like for you?", next: r2_2a },
+    { text: "Does being in New York affect how you navigate your identity?", next: r3_2a },
+    { text: getRandomExitLine(), next: exitNode }
   ]
 };

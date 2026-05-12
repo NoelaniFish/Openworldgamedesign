@@ -12,14 +12,6 @@ export function ProfilePage() {
       navigate('/intro');
       return;
     }
-
-    // If user has already completed profile, redirect to game world
-    const hasCompletedIntro = sessionStorage.getItem('hasCompletedIntro');
-    const userProfile = sessionStorage.getItem('userProfile');
-    if (hasCompletedIntro && userProfile) {
-      const worldPath = selectedWorld === 'world1' ? '/world/knoxville' : '/world/nyc';
-      navigate(worldPath, { replace: true });
-    }
   }, [selectedWorld, navigate]);
 
   const handleComplete = (profile: { name: string; identity: string; portrait: string }) => {

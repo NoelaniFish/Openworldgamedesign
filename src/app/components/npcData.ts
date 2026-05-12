@@ -1,9 +1,10 @@
 // Knox County NPCs - orange/red holographic figures (GIFs)
+// Only using large full-body GIFs (2MB+) to avoid portrait images appearing as NPCs
 import knoxNpc1 from '../imports/Untitled_Artwork_42.gif';
 import knoxNpc2 from '../imports/Untitled_Artwork_43.gif';
 import knoxNpc3 from '../imports/Untitled_Artwork_44.gif';
-import knoxNpc4 from '../imports/Untitled_Artwork_32.gif';
-import knoxNpc5 from '../imports/Untitled_Artwork_19.gif';
+import knoxNpc4 from '../imports/Untitled_Artwork_42.gif'; // Reusing 42
+import knoxNpc5 from '../imports/Untitled_Artwork_43.gif'; // Reusing 43
 
 // NYC NPCs - blue holographic figures (GIFs)
 import nycNpc1 from '../imports/Untitled_Artwork_45.gif';

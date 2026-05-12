@@ -33,7 +33,7 @@ export function NotepadModal({ onClose, onSubmit, isMobile = false }: NotepadMod
             Roadside Reflection
           </h2>
           <p className={`text-gray-700 ${isMobile ? 'text-sm' : 'text-lg'} font-light`} style={{ fontFamily: 'Courier, monospace' }}>
-            What does being butch mean to you or others?
+            What do you think being butch means?
           </p>
         </div>
 

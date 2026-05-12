@@ -1,0 +1,29 @@
+╔═══════════════════════════════════════════════════════════╗
+║  🚀 QUICK FIX: Include All Assets on GitHub (58MB)  🚀   ║
+╚═══════════════════════════════════════════════════════════╝
+
+Problem: Assets excluded (58MB > 50MB GitHub limit)
+Solution: Use Git LFS (Large File Storage)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 FASTEST FIX (Copy & Paste):
+
+./setup_lfs.sh
+git push -u origin main --force
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+That's it! All 58MB of assets will upload to GitHub.
+
+✅ What happens:
+• Script sets up Git LFS
+• Tracks *.gif, *.mp3, *.png files  
+• Commits everything with LFS
+• Ready to push
+
+📖 Need details? Read:
+• FIX_GITHUB_ASSETS.md - Full guide
+• SETUP_GIT_LFS.md - LFS explanation
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

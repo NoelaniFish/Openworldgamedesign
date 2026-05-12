@@ -162,6 +162,30 @@ const generateKnoxvilleCars = () => {
   return cars;
 };
 
+// Generate random cars for NYC (3-5 cars)
+const generateNYCCars = () => {
+  const carCount = Math.floor(Math.random() * 3) + 3;
+  const carTypes: ('car1' | 'car2' | 'car3' | 'car4')[] = ['car1', 'car2', 'car3', 'car4'];
+  const cars = [];
+
+  for (let i = 0; i < carCount; i++) {
+    const vx = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 3 + 4);
+    const vy = 0;
+
+    cars.push({
+      id: `car-nyc-${i}`,
+      type: carTypes[Math.floor(Math.random() * carTypes.length)],
+      x: Math.random() * 1600 + 200,
+      y: Math.random() * 800 + 200,
+      vx,
+      vy,
+      world: 'world2' as const
+    });
+  }
+
+  return cars;
+};
+
 // Generate random pigeons for NYC
 const generatePigeons = (trees: any[]) => {
   const pigeonCount = Math.floor(Math.random() * 5) + 2;
@@ -326,6 +350,7 @@ export function GameWorldPage() {
 
   const [blockades] = useState(() => generateBlockades(trees));
   const [knoxvilleCars] = useState(generateKnoxvilleCars());
+  const [nycCars] = useState(generateNYCCars());
   const [pigeons] = useState(() => generatePigeons(trees));
   const [rats] = useState(() => generateRats(trees, pigeons));
 
@@ -370,7 +395,7 @@ export function GameWorldPage() {
 
   const [carPositions, setCarPositions] = useState<Record<string, { x: number; y: number; vx: number; vy: number; flipped: boolean }>>(() => {
     const positions: Record<string, { x: number; y: number; vx: number; vy: number; flipped: boolean }> = {};
-    [...knoxvilleCars].forEach(car => {
+    [...knoxvilleCars, ...nycCars].forEach(car => {
       positions[car.id] = {
         x: car.x,
         y: car.y,
@@ -415,14 +440,14 @@ export function GameWorldPage() {
   );
 
   const currentCars = useMemo(() =>
-    knoxvilleCars.map(car => ({
+    [...knoxvilleCars, ...nycCars].map(car => ({
       ...car,
       x: carPositions[car.id]?.x ?? car.x,
       y: carPositions[car.id]?.y ?? car.y,
       vx: carPositions[car.id]?.vx ?? car.vx,
       vy: carPositions[car.id]?.vy ?? car.vy,
       flipped: carPositions[car.id]?.flipped ?? false
-    })), [knoxvilleCars, carPositions]
+    })), [knoxvilleCars, nycCars, carPositions]
   );
 
   // Initialize audio on mount
@@ -1195,7 +1220,7 @@ export function GameWorldPage() {
     const timestamp = new Date().toISOString();
     console.log('=== BUTCH IDENTITY RESPONSE ===');
     console.log('Timestamp:', timestamp);
-    console.log('Question: What does being butch mean to you or others?');
+    console.log('Question: What do you think being butch means?');
     console.log('Response:', response);
     console.log('===============================');
 

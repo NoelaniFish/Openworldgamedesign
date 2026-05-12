@@ -12,8 +12,8 @@ import { useNYCWeather } from '../hooks/useNYCWeather';
 import { useIsMobile } from '../hooks/useIsMobile';
 import { treeFacts } from '../components/treeFacts';
 import homingSound from '../imports/homing.mp3';
-import maloneyRdSound from '../imports/Maloney_Rd_2.mp3';
-import nycSubwaySound from '../imports/757583__thel200ster__nyc-subway-sept-24.mp3';
+const maloneyRdSound = 'https://videotourl.com/audio/1778563110788-0eb057e3-eab6-4d0b-a6a5-492ff061033a.mp3';
+const nycSubwaySound = 'https://videotourl.com/audio/1778563237798-f3241f41-1f7d-4fe5-b39b-7e46980c3015.mp3';
 
 // Helper function to check if two objects overlap
 const checkOverlap = (x1: number, y1: number, x2: number, y2: number, minDistance: number) => {

@@ -1,9 +1,9 @@
 // Knox County NPCs - orange/red holographic figures (GIFs)
-import knoxNpc1 from '../imports/Untitled_Artwork_40.gif';
-import knoxNpc2 from '../imports/Untitled_Artwork_41.gif';
-import knoxNpc3 from '../imports/Untitled_Artwork_42.gif';
-import knoxNpc4 from '../imports/Untitled_Artwork_43.gif';
-import knoxNpc5 from '../imports/Untitled_Artwork_44.gif';
+import knoxNpc1 from '../imports/Untitled_Artwork_42.gif';
+import knoxNpc2 from '../imports/Untitled_Artwork_43.gif';
+import knoxNpc3 from '../imports/Untitled_Artwork_44.gif';
+import knoxNpc4 from '../imports/Untitled_Artwork_32.gif';
+import knoxNpc5 from '../imports/Untitled_Artwork_19.gif';
 
 // NYC NPCs - blue holographic figures (GIFs)
 import nycNpc1 from '../imports/Untitled_Artwork_45.gif';
@@ -15,10 +15,10 @@ import nycNpc4 from '../imports/Untitled_Artwork_48.gif';
 import amberImg from '../imports/Untitled_Artwork_18.gif';
 import portiaImg from '../imports/Untitled_Artwork_17.gif';
 import joceImg from '../imports/IMG_1860.gif';
-import dImg from '../imports/Untitled_Artwork_41-1.gif';
+import dImg from '../imports/Untitled_Artwork_41.gif';
 import fImg from '../imports/Untitled_Artwork_42-portrait.gif';
-import samImg from '../imports/Untitled_Artwork_40-1.gif';
-import romeroImg from '../imports/Untitled_Artwork_19.gif';
+import samImg from '../imports/Untitled_Artwork_40.gif';
+import romeroImg from '../imports/Untitled_Artwork_32-1.gif';
 
 // Import shared dialogue
 import { amberDialogue } from './amberDialogue';

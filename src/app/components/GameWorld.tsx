@@ -9,7 +9,7 @@ import playerIdleImage2 from 'figma:asset/8446841ed471aede251459534da0046941381e
 import playerIdleImage3 from 'figma:asset/b222411a73242dc42ff03ca8f512ab716cb0bc2e.png';
 import playerMovingImage from 'figma:asset/3ff73c4afc87209ba7eb4b790111df6edd2bb482.png';
 import knoxvilleBackground from 'figma:asset/748f08803cfdfebd30a90932cc2fc1fbe0d37a8a.png';
-import nycBackground from '../../imports/Untitled_Artwork_4.png';
+import nycBackground from '../imports/Untitled_Artwork_4.png';
 
 interface GameWorldProps {
   playerPos: { x: number; y: number };
